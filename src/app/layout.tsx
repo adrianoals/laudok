@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://laudok.vercel.app"),
@@ -34,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className="scroll-smooth">
-      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${inter.variable} ${bricolage.variable} scroll-smooth`}>
+      <body className="font-sans antialiased bg-surface-alt text-ink" suppressHydrationWarning>
         {children}
       </body>
     </html>
