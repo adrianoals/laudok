@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { Loader2, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button, Card, Eyebrow } from '@/components/ui';
 
 interface FormData {
   name: string;
@@ -74,8 +74,14 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-surface rounded-2xl shadow-[var(--shadow-emboss)] p-8">
-      <h2 className="text-display-m text-laudok-900 mb-6">Envie sua mensagem</h2>
+    <Card variant="emboss" withFillet className="p-8 md:p-10">
+      <Eyebrow>Formulário</Eyebrow>
+      <h2 className="text-display-m text-laudok-900 mt-3 mb-2">
+        Envie sua mensagem.
+      </h2>
+      <p className="text-body text-ink-muted mb-8">
+        Preencha os campos abaixo e responderemos em até 24 horas em dias úteis.
+      </p>
 
       {formState.status === 'success' && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md flex items-start gap-3">
@@ -108,35 +114,37 @@ export default function ContactForm() {
           />
         </div>
 
-        <div>
-          <label htmlFor="email" className="block text-body-s font-medium text-ink mb-2">
-            E-mail *
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-            className={inputClasses}
-            placeholder="seu@email.com"
-          />
-        </div>
+        <div className="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="email" className="block text-body-s font-medium text-ink mb-2">
+              E-mail *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              className={inputClasses}
+              placeholder="seu@email.com"
+            />
+          </div>
 
-        <div>
-          <label htmlFor="phone" className="block text-body-s font-medium text-ink mb-2">
-            Telefone <span className="text-ink-faded font-normal">(opcional)</span>
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={inputClasses}
-            placeholder="(11) 99999-9999"
-          />
+          <div>
+            <label htmlFor="phone" className="block text-body-s font-medium text-ink mb-2">
+              Telefone <span className="text-ink-faded font-normal">(opcional)</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className={inputClasses}
+              placeholder="(11) 99999-9999"
+            />
+          </div>
         </div>
 
         <div>
@@ -147,7 +155,7 @@ export default function ContactForm() {
             id="message"
             name="message"
             required
-            rows={5}
+            rows={6}
             value={formData.message}
             onChange={handleChange}
             className={`${inputClasses} resize-none`}
@@ -169,6 +177,6 @@ export default function ContactForm() {
           )}
         </Button>
       </form>
-    </div>
+    </Card>
   );
 }

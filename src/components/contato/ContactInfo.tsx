@@ -1,5 +1,14 @@
-import { Mail, MapPin, Linkedin, Instagram, Youtube, type LucideIcon } from 'lucide-react';
-import { IconTile } from '@/components/ui';
+import {
+  Mail,
+  MapPin,
+  Clock,
+  Linkedin,
+  Instagram,
+  Youtube,
+  Share2,
+  type LucideIcon,
+} from 'lucide-react';
+import { Card, Eyebrow, IconTile } from '@/components/ui';
 
 const socials: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/laudok' },
@@ -9,55 +18,86 @@ const socials: { icon: LucideIcon; label: string; href: string }[] = [
 
 export default function ContactInfo() {
   return (
-    <div className="space-y-10">
-      <div>
-        <div className="text-label text-laudok-700 mb-3">Fale com a gente</div>
-        <h2 className="text-display-m text-laudok-900 mb-4">Entre em contato.</h2>
-        <p className="text-body text-ink-muted">
-          Estamos prontos para ajudar você. Use os canais abaixo ou preencha o formulário ao lado.
+    <div className="space-y-6">
+      <div className="mb-2">
+        <Eyebrow>Canais de contato</Eyebrow>
+        <h2 className="text-display-m text-laudok-900 mt-3">
+          Como falar com a gente.
+        </h2>
+        <p className="text-body text-ink-muted mt-3 max-w-md">
+          Escolha o melhor canal ou preencha o formulário ao lado. Respondemos em até 24 horas em dias úteis.
         </p>
       </div>
 
-      <div className="space-y-5">
+      <Card variant="emboss" withFillet hoverable className="p-6">
         <div className="flex items-start gap-4">
-          <IconTile icon={Mail} tone="soft" size="md" />
+          <IconTile icon={Mail} tone="filled" size="md" />
           <div>
-            <div className="text-label text-laudok-700 mb-1">E-mail</div>
-            <a href="mailto:contato@laudok.com.br" className="text-body text-ink hover:text-laudok-500 transition-colors">
+            <div className="text-label text-laudok-700">E-mail</div>
+            <a
+              href="mailto:contato@laudok.com.br"
+              className="text-body font-semibold text-laudok-900 hover:text-laudok-500 transition-colors"
+            >
               contato@laudok.com.br
             </a>
+            <p className="text-body-s text-ink-muted mt-1">
+              Resposta em até 24 horas em dias úteis.
+            </p>
           </div>
         </div>
+      </Card>
+
+      <Card variant="emboss" hoverable className="p-6">
         <div className="flex items-start gap-4">
           <IconTile icon={MapPin} tone="soft" size="md" />
           <div>
-            <div className="text-label text-laudok-700 mb-1">Localização</div>
-            <p className="text-body text-ink">São Paulo, SP</p>
+            <div className="text-label text-laudok-700">Localização</div>
+            <p className="text-body font-semibold text-laudok-900">São Paulo, SP</p>
+            <p className="text-body-s text-ink-muted mt-1">
+              Atendimento 100% online em todo o Brasil.
+            </p>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div className="pt-6 border-t border-sand-200">
-        <div className="text-label text-laudok-700 mb-3">Redes sociais</div>
-        <div className="flex gap-2">
-          {socials.map(({ icon: Icon, label, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="w-10 h-10 inline-flex items-center justify-center rounded-md border border-sand-200 text-laudok-800 hover:bg-laudok-800 hover:text-surface hover:border-laudok-800 transition-colors"
-            >
-              <Icon size={18} />
-            </a>
-          ))}
+      <Card variant="emboss" hoverable className="p-6">
+        <div className="flex items-start gap-4">
+          <IconTile icon={Clock} tone="soft" size="md" />
+          <div>
+            <div className="text-label text-laudok-700">Horário</div>
+            <p className="text-body font-semibold text-laudok-900">Segunda a Sexta · 9h às 18h</p>
+            <p className="text-body-s text-ink-muted mt-1">
+              Fora deste horário, fale com a gente pelo e-mail.
+            </p>
+          </div>
         </div>
-      </div>
+      </Card>
 
-      <p className="text-caption text-ink-muted">
-        Horário de atendimento: Segunda a Sexta, das 9h às 18h
-      </p>
+      <Card variant="emboss" className="p-6">
+        <div className="flex items-start gap-4">
+          <IconTile icon={Share2} tone="soft" size="md" />
+          <div className="flex-grow">
+            <div className="text-label text-laudok-700">Redes sociais</div>
+            <p className="text-body-s text-ink-muted mt-1 mb-3">
+              Siga a gente para novidades e conteúdo técnico.
+            </p>
+            <div className="flex gap-2">
+              {socials.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 inline-flex items-center justify-center rounded-md border border-sand-200 text-laudok-800 hover:bg-laudok-800 hover:text-surface hover:border-laudok-800 transition-colors"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

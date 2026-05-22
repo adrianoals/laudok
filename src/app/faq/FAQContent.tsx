@@ -1,8 +1,17 @@
 "use client";
 
 import { useMemo, useState } from 'react';
-import { ChevronDown, Search } from 'lucide-react';
-import { Badge, Card } from '@/components/ui';
+import {
+  ChevronDown,
+  Search,
+  Layers,
+  Package,
+  ShieldCheck,
+  CreditCard,
+  Lock,
+  type LucideIcon,
+} from 'lucide-react';
+import { Card, Eyebrow, IconTile } from '@/components/ui';
 
 type CategoryId = 'todos' | 'produto' | 'norma' | 'financeiro' | 'seguranca';
 
@@ -12,12 +21,12 @@ interface FAQItem {
   answer: string;
 }
 
-const categories: { id: CategoryId; label: string }[] = [
-  { id: 'todos', label: 'Todas' },
-  { id: 'produto', label: 'Sobre o Produto' },
-  { id: 'norma', label: 'Atendimento à Norma' },
-  { id: 'financeiro', label: 'Financeiro e Pagamento' },
-  { id: 'seguranca', label: 'Segurança e Privacidade' },
+const categories: { id: CategoryId; label: string; icon: LucideIcon }[] = [
+  { id: 'todos', label: 'Todas', icon: Layers },
+  { id: 'produto', label: 'Sobre o Produto', icon: Package },
+  { id: 'norma', label: 'Atendimento à Norma', icon: ShieldCheck },
+  { id: 'financeiro', label: 'Financeiro e Pagamento', icon: CreditCard },
+  { id: 'seguranca', label: 'Segurança e Privacidade', icon: Lock },
 ];
 
 const faqs: FAQItem[] = [
@@ -82,6 +91,20 @@ export default function FAQContent() {
   const [search, setSearch] = useState('');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  const countByCategory = useMemo(() => {
+    const counts: Record<CategoryId, number> = {
+      todos: faqs.length,
+      produto: 0,
+      norma: 0,
+      financeiro: 0,
+      seguranca: 0,
+    };
+    faqs.forEach((f) => {
+      counts[f.category]++;
+    });
+    return counts;
+  }, []);
+
   const filtered = useMemo(() => {
     const normalize = (text: string) =>
       text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -100,10 +123,47 @@ export default function FAQContent() {
   };
 
   return (
-    <div className="space-y-10">
-      <div className="max-w-2xl mx-auto">
-        <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
-        <div className="relative">
+    <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
+      <aside className="lg:col-span-4">
+        <div className="lg:sticky lg:top-24">
+          <Eyebrow>Filtrar por categoria</Eyebrow>
+          <h2 className="text-display-m text-laudok-900 mt-3 mb-6">Categorias</h2>
+          <div className="space-y-3">
+            {categories.map((cat) => {
+              const active = activeCategory === cat.id;
+              const count = countByCategory[cat.id];
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => handleCategoryChange(cat.id)}
+                  aria-pressed={active}
+                  className="w-full text-left"
+                >
+                  <Card
+                    variant={active ? 'emboss' : 'flat'}
+                    withFillet={active}
+                    hoverable={!active}
+                    className="p-4 flex items-center gap-4"
+                  >
+                    <IconTile icon={cat.icon} tone={active ? 'filled' : 'soft'} size="sm" />
+                    <div className="flex-grow">
+                      <div className="text-body font-semibold text-laudok-900">{cat.label}</div>
+                      <div className="text-caption text-ink-muted mt-0.5">
+                        {count} {count === 1 ? 'pergunta' : 'perguntas'}
+                      </div>
+                    </div>
+                  </Card>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </aside>
+
+      <div className="lg:col-span-8">
+        <div className="relative mb-8">
+          <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
           <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faded" />
           <input
             id="faq-search"
@@ -111,51 +171,48 @@ export default function FAQContent() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por palavra-chave..."
-            className="w-full rounded-full border border-sand-200 bg-surface py-3 pl-12 pr-4 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors"
+            className="w-full rounded-full border border-sand-200 bg-surface py-3.5 pl-12 pr-4 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors"
           />
         </div>
-      </div>
 
-      <div className="flex flex-wrap justify-center gap-2">
-        {categories.map((category) => {
-          const isActive = activeCategory === category.id;
-          return (
-            <button key={category.id} type="button" onClick={() => handleCategoryChange(category.id)} aria-pressed={isActive}>
-              <Badge variant={isActive ? 'solid' : 'outline'} size="md">{category.label}</Badge>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="max-w-3xl mx-auto space-y-3">
-        {filtered.length === 0 ? (
-          <Card variant="flat" className="p-10 text-center text-ink-muted">
-            Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
-          </Card>
-        ) : (
-          filtered.map((faq, index) => (
-            <Card key={faq.question} variant="flat" className="overflow-hidden">
-              <button
-                className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                aria-expanded={openIndex === index}
-              >
-                <span className="text-display-s text-laudok-900">{faq.question}</span>
-                <ChevronDown
-                  size={20}
-                  className={`text-laudok-500 transition-transform flex-shrink-0 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {openIndex === index && (
-                <div className="px-6 pb-6">
-                  <p className="text-body text-ink leading-relaxed">{faq.answer}</p>
-                </div>
-              )}
+        <div className="space-y-3">
+          {filtered.length === 0 ? (
+            <Card variant="flat" className="p-10 text-center text-ink-muted">
+              Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
             </Card>
-          ))
-        )}
+          ) : (
+            filtered.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <Card
+                  key={faq.question}
+                  variant={isOpen ? 'emboss' : 'flat'}
+                  withFillet={isOpen}
+                  className="overflow-hidden"
+                >
+                  <button
+                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-body font-semibold text-laudok-900">{faq.question}</span>
+                    <ChevronDown
+                      size={20}
+                      className={`text-laudok-500 transition-transform flex-shrink-0 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-6 pb-6">
+                      <p className="text-body text-ink-muted leading-relaxed">{faq.answer}</p>
+                    </div>
+                  )}
+                </Card>
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );
