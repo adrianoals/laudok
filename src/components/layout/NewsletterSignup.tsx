@@ -44,7 +44,7 @@ export default function NewsletterSignup() {
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
         >
-          <div className="md:flex-shrink-0">
+          <div className="md:flex-shrink-0 text-center md:text-left">
             <div className="text-label text-laudok-200">Newsletter Laudok!</div>
             <p className="text-body-s text-laudok-100/80 mt-1">
               Conteúdos sobre laudos e novidades direto no seu e-mail.

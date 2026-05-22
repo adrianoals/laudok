@@ -23,75 +23,75 @@ export default function Footer() {
       <div className="absolute inset-0 bg-grid-blueprint-light bg-grid-blueprint--masked opacity-30 pointer-events-none" aria-hidden />
       <div className="relative">
         <NewsletterSignup />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
-          <div className="md:col-span-5">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-display-m text-surface">Laudok!</span>
-            </Link>
-            <p className="text-body-s text-laudok-200 max-w-sm leading-relaxed">
-              Laudos de engenharia inteligentes para condomínios. Conformidade com a NBR 16.747/2020 e produtividade
-              para engenheiros e arquitetos.
-            </p>
-            <div className="flex gap-2 mt-6">
-              {socials.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-10 h-10 inline-flex items-center justify-center rounded-md border border-laudok-700 text-surface hover:bg-laudok-800 hover:border-laudok-500 transition-colors"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-14">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 text-center md:text-left">
+            <div className="md:col-span-5">
+              <Link href="/" className="inline-block mb-4">
+                <span className="text-display-m text-surface">Laudok!</span>
+              </Link>
+              <p className="text-body-s text-laudok-200 max-w-sm mx-auto md:mx-0 leading-relaxed">
+                Laudos de engenharia inteligentes para condomínios. Conformidade com a NBR 16.747/2020 e produtividade
+                para engenheiros e arquitetos.
+              </p>
+              <div className="flex gap-2 mt-6 justify-center md:justify-start">
+                {socials.map(({ icon: Icon, label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-10 h-10 inline-flex items-center justify-center rounded-md border border-laudok-700 text-surface hover:bg-laudok-800 hover:border-laudok-500 transition-colors"
+                  >
+                    <Icon size={18} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="md:col-span-3">
+              <h3 className="text-label text-laudok-200 mb-5">Navegação</h3>
+              <ul className="space-y-3">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-body-s text-laudok-100 hover:text-surface transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="md:col-span-4">
+              <h3 className="text-label text-laudok-200 mb-5">Contato</h3>
+              <ul className="space-y-3">
+                <li className="flex items-center justify-center md:justify-start gap-3 text-body-s text-laudok-100">
+                  <Mail size={16} className="flex-shrink-0" />
+                  <a href="mailto:contato@laudok.com.br" className="hover:text-surface transition-colors">
+                    contato@laudok.com.br
+                  </a>
+                </li>
+                <li className="flex items-center justify-center md:justify-start gap-3 text-body-s text-laudok-100">
+                  <MapPin size={16} className="flex-shrink-0" />
+                  <span>São Paulo, SP</span>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div className="md:col-span-3">
-            <h3 className="text-label text-laudok-200 mb-5">Navegação</h3>
-            <ul className="space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-body-s text-laudok-100 hover:text-surface transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="mt-10 md:mt-12 pt-8 border-t border-laudok-800 flex flex-col md:flex-row justify-between items-center gap-4 text-body-s text-laudok-200">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <Link href="/politica-de-privacidade" className="hover:text-surface transition-colors">
+                Política de Privacidade
+              </Link>
+              <Link href="/termos-de-uso" className="hover:text-surface transition-colors">
+                Termos de Uso
+              </Link>
+            </div>
+            <p className="text-laudok-300 text-center">
+              © {new Date().getFullYear()} Laudok! Todos os direitos reservados.
+            </p>
           </div>
-
-          <div className="md:col-span-4">
-            <h3 className="text-label text-laudok-200 mb-5">Contato</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-body-s text-laudok-100">
-                <Mail size={16} className="mt-0.5 flex-shrink-0" />
-                <a href="mailto:contato@laudok.com.br" className="hover:text-surface transition-colors">
-                  contato@laudok.com.br
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-body-s text-laudok-100">
-                <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                <span>São Paulo, SP</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-12 pt-8 border-t border-laudok-800 flex flex-col md:flex-row justify-between items-center gap-4 text-body-s text-laudok-200">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/politica-de-privacidade" className="hover:text-surface transition-colors">
-              Política de Privacidade
-            </Link>
-            <Link href="/termos-de-uso" className="hover:text-surface transition-colors">
-              Termos de Uso
-            </Link>
-          </div>
-          <p className="text-laudok-300">
-            © {new Date().getFullYear()} Laudok! Todos os direitos reservados.
-          </p>
-        </div>
         </div>
       </div>
     </footer>

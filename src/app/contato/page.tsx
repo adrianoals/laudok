@@ -39,12 +39,12 @@ export default function ContatoPage() {
           tone="dark"
           withGrid
           decorations={heroDecorations}
-          className="pt-20 pb-16"
+          paddingY="py-16 md:py-24 lg:py-28"
         >
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-5 lg:space-y-6 text-center lg:text-left">
               <Reveal>
-                <Eyebrow tone="light">Fale com a gente</Eyebrow>
+                <Eyebrow tone="light" className="justify-center lg:justify-start">Fale com a gente</Eyebrow>
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="text-display-xl text-surface">
@@ -52,7 +52,7 @@ export default function ContatoPage() {
                 </h1>
               </Reveal>
               <Reveal delay={160}>
-                <p className="text-body-l text-laudok-100 max-w-xl">
+                <p className="text-body-l text-laudok-100 max-w-xl mx-auto lg:mx-0">
                   Tire suas dúvidas, peça um orçamento ou solicite mais informações sobre o Laudok!
                   Respondemos em até 24 horas em dias úteis.
                 </p>

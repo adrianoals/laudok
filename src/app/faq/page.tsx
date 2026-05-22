@@ -37,12 +37,12 @@ export default function FAQPage() {
           tone="dark"
           withGrid
           decorations={heroDecorations}
-          className="pt-20 pb-16"
+          paddingY="py-16 md:py-24 lg:py-28"
         >
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-5 lg:space-y-6 text-center lg:text-left">
               <Reveal>
-                <Eyebrow tone="light">Auto atendimento</Eyebrow>
+                <Eyebrow tone="light" className="justify-center lg:justify-start">Auto atendimento</Eyebrow>
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="text-display-xl text-surface">
@@ -50,7 +50,7 @@ export default function FAQPage() {
                 </h1>
               </Reveal>
               <Reveal delay={160}>
-                <p className="text-body-l text-laudok-100 max-w-xl">
+                <p className="text-body-l text-laudok-100 max-w-xl mx-auto lg:mx-0">
                   Encontre rapidamente as respostas para as dúvidas mais comuns sobre o Laudok!
                   Filtre por categoria ou use a busca.
                 </p>

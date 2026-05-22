@@ -120,13 +120,13 @@ export default function FAQContent() {
   };
 
   return (
-    <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
-      <aside className="lg:col-span-4">
-        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 lg:p-6 lg:sticky lg:top-24">
+    <div className="grid md:grid-cols-12 gap-8 md:gap-10 lg:gap-12">
+      <aside className="md:col-span-5 lg:col-span-4">
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 md:p-6 md:sticky md:top-24">
           <Eyebrow>Filtrar por categoria</Eyebrow>
-          <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden lg:block">Categorias</h2>
+          <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden md:block">Categorias</h2>
 
-          <div className="flex lg:flex-col gap-3 mt-4 lg:mt-0 overflow-x-auto lg:overflow-visible pb-1 -mx-5 px-5 lg:mx-0 lg:px-0 snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex md:flex-col gap-3 mt-4 md:mt-0 overflow-x-auto md:overflow-visible pb-1 -mx-5 px-5 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((cat) => {
               const active = activeCategory === cat.id;
               const count = countByCategory[cat.id];
@@ -136,18 +136,18 @@ export default function FAQContent() {
                   type="button"
                   onClick={() => handleCategoryChange(cat.id)}
                   aria-pressed={active}
-                  className="flex-shrink-0 lg:flex-shrink lg:w-full text-left snap-start"
+                  className="flex-shrink-0 md:flex-shrink md:w-full text-left snap-start"
                 >
                   <Card
                     variant={active ? 'emboss' : 'flat'}
                     withFillet={active}
                     hoverable={!active}
-                    className="p-3 lg:p-4 flex items-center gap-3 lg:gap-4 whitespace-nowrap lg:whitespace-normal min-w-[180px] lg:min-w-0"
+                    className="p-3 md:p-4 flex items-center gap-3 md:gap-4 whitespace-nowrap md:whitespace-normal min-w-[180px] md:min-w-0"
                   >
                     <IconTile icon={cat.icon} tone={active ? 'filled' : 'soft'} size="sm" />
                     <div className="flex-grow">
-                      <div className="text-body-s lg:text-body font-semibold text-laudok-900">{cat.label}</div>
-                      <div className="text-caption text-ink-muted mt-0.5 hidden lg:block">
+                      <div className="text-body-s md:text-body font-semibold text-laudok-900">{cat.label}</div>
+                      <div className="text-caption text-ink-muted mt-0.5 hidden md:block">
                         {count} {count === 1 ? 'pergunta' : 'perguntas'}
                       </div>
                     </div>
@@ -160,8 +160,8 @@ export default function FAQContent() {
         </div>
       </aside>
 
-      <div className="lg:col-span-8">
-        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 lg:p-6">
+      <div className="md:col-span-7 lg:col-span-8">
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 md:p-6">
           <div className="relative mb-5">
             <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
             <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faded" />

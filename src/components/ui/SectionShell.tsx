@@ -6,6 +6,7 @@ interface SectionShellProps extends HTMLAttributes<HTMLElement> {
   tone?: Tone;
   withGrid?: boolean;
   decorations?: ReactNode;
+  paddingY?: string;
   children: ReactNode;
 }
 
@@ -20,6 +21,7 @@ export function SectionShell({
   tone = 'cream',
   withGrid = false,
   decorations,
+  paddingY = 'py-20 md:py-28 lg:py-32',
   className,
   children,
   ...rest
@@ -49,7 +51,7 @@ export function SectionShell({
         />
       )}
       {decorations}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${paddingY}`}>
         {children}
       </div>
     </section>
