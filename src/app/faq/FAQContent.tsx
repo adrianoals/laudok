@@ -127,8 +127,9 @@ export default function FAQContent() {
       <aside className="lg:col-span-4">
         <div className="lg:sticky lg:top-24">
           <Eyebrow>Filtrar por categoria</Eyebrow>
-          <h2 className="text-display-m text-laudok-900 mt-3 mb-6">Categorias</h2>
-          <div className="space-y-3">
+          <h2 className="text-display-m text-laudok-900 mt-3 mb-5 lg:mb-6 hidden lg:block">Categorias</h2>
+
+          <div className="flex lg:flex-col gap-3 mt-4 lg:mt-0 overflow-x-auto lg:overflow-visible pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((cat) => {
               const active = activeCategory === cat.id;
               const count = countByCategory[cat.id];
@@ -138,18 +139,18 @@ export default function FAQContent() {
                   type="button"
                   onClick={() => handleCategoryChange(cat.id)}
                   aria-pressed={active}
-                  className="w-full text-left"
+                  className="flex-shrink-0 lg:flex-shrink lg:w-full text-left snap-start"
                 >
                   <Card
                     variant={active ? 'emboss' : 'flat'}
                     withFillet={active}
                     hoverable={!active}
-                    className="p-4 flex items-center gap-4"
+                    className="p-3 lg:p-4 flex items-center gap-3 lg:gap-4 whitespace-nowrap lg:whitespace-normal min-w-[180px] lg:min-w-0"
                   >
                     <IconTile icon={cat.icon} tone={active ? 'filled' : 'soft'} size="sm" />
                     <div className="flex-grow">
-                      <div className="text-body font-semibold text-laudok-900">{cat.label}</div>
-                      <div className="text-caption text-ink-muted mt-0.5">
+                      <div className="text-body-s lg:text-body font-semibold text-laudok-900">{cat.label}</div>
+                      <div className="text-caption text-ink-muted mt-0.5 hidden lg:block">
                         {count} {count === 1 ? 'pergunta' : 'perguntas'}
                       </div>
                     </div>
