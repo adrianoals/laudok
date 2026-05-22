@@ -16,7 +16,7 @@ interface FormState {
 }
 
 const inputClasses =
-  'w-full px-4 py-3 rounded-md bg-surface border border-sand-200 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors';
+  'w-full rounded-md bg-laudok-50/60 border border-laudok-200/70 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-4 focus:ring-laudok-500/15 focus:border-laudok-500 focus:bg-surface hover:border-laudok-300 transition-all duration-200 py-3';
 
 export default function LoginForm() {
   const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
@@ -75,7 +75,7 @@ export default function LoginForm() {
             E-mail
           </label>
           <div className="relative">
-            <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faded" />
+            <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-laudok-500" />
             <input
               type="email"
               id="email"
@@ -83,7 +83,7 @@ export default function LoginForm() {
               required
               value={formData.email}
               onChange={handleChange}
-              className={`${inputClasses} pl-10`}
+              className={`${inputClasses} pl-11`}
               placeholder="seu@email.com"
             />
           </div>
@@ -94,7 +94,7 @@ export default function LoginForm() {
             Senha
           </label>
           <div className="relative">
-            <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faded" />
+            <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-laudok-500" />
             <input
               type={showPassword ? 'text' : 'password'}
               id="password"
@@ -102,7 +102,7 @@ export default function LoginForm() {
               required
               value={formData.password}
               onChange={handleChange}
-              className={`${inputClasses} pl-10 pr-12`}
+              className={`${inputClasses} pl-11 pr-12`}
               placeholder="Sua senha"
             />
             <button

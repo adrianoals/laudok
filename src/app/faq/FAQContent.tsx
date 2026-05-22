@@ -4,7 +4,6 @@ import { useMemo, useState } from 'react';
 import {
   ChevronDown,
   Search,
-  Layers,
   Package,
   ShieldCheck,
   CreditCard,
@@ -13,16 +12,15 @@ import {
 } from 'lucide-react';
 import { Card, Eyebrow, IconTile } from '@/components/ui';
 
-type CategoryId = 'todos' | 'produto' | 'norma' | 'financeiro' | 'seguranca';
+type CategoryId = 'produto' | 'norma' | 'financeiro' | 'seguranca';
 
 interface FAQItem {
-  category: Exclude<CategoryId, 'todos'>;
+  category: CategoryId;
   question: string;
   answer: string;
 }
 
 const categories: { id: CategoryId; label: string; icon: LucideIcon }[] = [
-  { id: 'todos', label: 'Todas', icon: Layers },
   { id: 'produto', label: 'Sobre o Produto', icon: Package },
   { id: 'norma', label: 'Atendimento à Norma', icon: ShieldCheck },
   { id: 'financeiro', label: 'Financeiro e Pagamento', icon: CreditCard },
@@ -87,13 +85,12 @@ const faqs: FAQItem[] = [
 ];
 
 export default function FAQContent() {
-  const [activeCategory, setActiveCategory] = useState<CategoryId>('todos');
+  const [activeCategory, setActiveCategory] = useState<CategoryId | null>(null);
   const [search, setSearch] = useState('');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const countByCategory = useMemo(() => {
     const counts: Record<CategoryId, number> = {
-      todos: faqs.length,
       produto: 0,
       norma: 0,
       financeiro: 0,
@@ -110,26 +107,25 @@ export default function FAQContent() {
       text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const term = normalize(search.trim());
     return faqs.filter((faq) => {
-      const matchCategory = activeCategory === 'todos' || faq.category === activeCategory;
-      if (!matchCategory) return false;
+      if (activeCategory && faq.category !== activeCategory) return false;
       if (!term) return true;
       return normalize(faq.question).includes(term) || normalize(faq.answer).includes(term);
     });
   }, [activeCategory, search]);
 
   const handleCategoryChange = (id: CategoryId) => {
-    setActiveCategory(id);
+    setActiveCategory(activeCategory === id ? null : id);
     setOpenIndex(null);
   };
 
   return (
     <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
       <aside className="lg:col-span-4">
-        <div className="lg:sticky lg:top-24">
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 lg:p-6 lg:sticky lg:top-24">
           <Eyebrow>Filtrar por categoria</Eyebrow>
-          <h2 className="text-display-m text-laudok-900 mt-3 mb-5 lg:mb-6 hidden lg:block">Categorias</h2>
+          <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden lg:block">Categorias</h2>
 
-          <div className="flex lg:flex-col gap-3 mt-4 lg:mt-0 overflow-x-auto lg:overflow-visible pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex lg:flex-col gap-3 mt-4 lg:mt-0 overflow-x-auto lg:overflow-visible pb-1 -mx-5 px-5 lg:mx-0 lg:px-0 snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((cat) => {
               const active = activeCategory === cat.id;
               const count = countByCategory[cat.id];
@@ -159,6 +155,16 @@ export default function FAQContent() {
               );
             })}
           </div>
+
+          {activeCategory && (
+            <button
+              type="button"
+              onClick={() => setActiveCategory(null)}
+              className="mt-5 text-caption text-laudok-700 hover:text-laudok-500 transition-colors hidden lg:block"
+            >
+              ↺ Limpar filtro
+            </button>
+          )}
         </div>
       </aside>
 

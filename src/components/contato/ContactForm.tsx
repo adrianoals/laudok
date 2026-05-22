@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { Loader2, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Loader2, Send, CheckCircle, AlertCircle, User, Mail, Phone, MessageSquare } from 'lucide-react';
 import { Button, Card, Eyebrow } from '@/components/ui';
 
 interface FormData {
@@ -16,8 +16,12 @@ interface FormState {
   message: string;
 }
 
-const inputClasses =
-  'w-full px-4 py-3 rounded-md bg-surface border border-sand-200 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors';
+const fieldClasses =
+  'w-full rounded-md bg-laudok-50/60 border border-laudok-200/70 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-4 focus:ring-laudok-500/15 focus:border-laudok-500 focus:bg-surface hover:border-laudok-300 transition-all duration-200';
+
+const inputClasses = `${fieldClasses} pl-11 pr-4 py-3`;
+const textareaClasses = `${fieldClasses} px-4 py-3 resize-none`;
+const iconClasses = 'absolute left-3.5 top-1/2 -translate-y-1/2 text-laudok-500';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -102,16 +106,19 @@ export default function ContactForm() {
           <label htmlFor="name" className="block text-body-s font-medium text-ink mb-2">
             Nome Completo *
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            value={formData.name}
-            onChange={handleChange}
-            className={inputClasses}
-            placeholder="Seu nome completo"
-          />
+          <div className="relative">
+            <User size={18} className={iconClasses} />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              className={inputClasses}
+              placeholder="Seu nome completo"
+            />
+          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5">
@@ -119,31 +126,37 @@ export default function ContactForm() {
             <label htmlFor="email" className="block text-body-s font-medium text-ink mb-2">
               E-mail *
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className={inputClasses}
-              placeholder="seu@email.com"
-            />
+            <div className="relative">
+              <Mail size={18} className={iconClasses} />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className={inputClasses}
+                placeholder="seu@email.com"
+              />
+            </div>
           </div>
 
           <div>
             <label htmlFor="phone" className="block text-body-s font-medium text-ink mb-2">
               Telefone <span className="text-ink-faded font-normal">(opcional)</span>
             </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className={inputClasses}
-              placeholder="(11) 99999-9999"
-            />
+            <div className="relative">
+              <Phone size={18} className={iconClasses} />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={inputClasses}
+                placeholder="(11) 99999-9999"
+              />
+            </div>
           </div>
         </div>
 
@@ -151,16 +164,19 @@ export default function ContactForm() {
           <label htmlFor="message" className="block text-body-s font-medium text-ink mb-2">
             Mensagem *
           </label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows={6}
-            value={formData.message}
-            onChange={handleChange}
-            className={`${inputClasses} resize-none`}
-            placeholder="Como podemos ajudá-lo?"
-          />
+          <div className="relative">
+            <MessageSquare size={18} className="absolute left-3.5 top-4 text-laudok-500" />
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows={6}
+              value={formData.message}
+              onChange={handleChange}
+              className={`${textareaClasses} pl-11`}
+              placeholder="Como podemos ajudá-lo?"
+            />
+          </div>
         </div>
 
         <Button type="submit" size="lg" disabled={formState.status === 'loading'} className="w-full">
