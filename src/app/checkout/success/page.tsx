@@ -20,7 +20,7 @@ export default function CheckoutSuccessPage() {
               Pagamento Confirmado!
             </h1>
             <p className="text-lg text-gray-600">
-              Obrigado por assinar o Laudok. Seu cadastro está sendo processado e você receberá um email com as instruções de acesso em breve.
+              Obrigado por assinar o Laudok! Seu cadastro está sendo processado e você receberá um email com as instruções de acesso em breve.
             </p>
           </div>
 

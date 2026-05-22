@@ -2,31 +2,33 @@
 
 import React from 'react';
 import Link from 'next/link';
+import NewsletterSignup from './NewsletterSignup';
 
 export default function Footer() {
   return (
     <footer className="bg-gradient-laudok text-white">
+      <NewsletterSignup />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo e Descrição */}
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="inline-block mb-6">
-              <h1 className="text-2xl font-bold">LAUDOK!</h1>
+              <h1 className="text-2xl font-bold">Laudok!</h1>
               {/* <Image
                 src="/logo.svg"
-                alt="LAUDOK!-PRÓ Logo"
+                alt="Laudok! Logo"
                 width={160}
                 height={40}
                 className="h-10 w-auto"
               /> */}
             </Link>
             <p className="text-laudok-light mb-6">
-              Transformando a forma como laudos técnicos são elaborados. 
+              Transformando a forma como laudos técnicos são elaborados.
               Soluções inteligentes para engenheiros e arquitetos.
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/laudok"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-laudok-light transition-colors"
@@ -34,7 +36,7 @@ export default function Footer() {
                 LinkedIn
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/laudo.ok"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-laudok-light transition-colors"
@@ -42,7 +44,7 @@ export default function Footer() {
                 Instagram
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/@Laudok"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-laudok-light transition-colors"
@@ -77,6 +79,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/faq" className="text-laudok-light hover:text-white transition-colors">
+                  Perguntas Frequentes
+                </Link>
+              </li>
+              <li>
                 <Link href="/contato" className="text-laudok-light hover:text-white transition-colors">
                   Contato
                 </Link>
@@ -90,9 +97,6 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="text-laudok-light">
                 contato@laudok.com.br
-              </li>
-              <li className="text-laudok-light">
-                (11) 99999-9999
               </li>
               <li className="text-laudok-light">
                 São Paulo, SP
@@ -113,7 +117,7 @@ export default function Footer() {
             </Link>
           </div>
           <p className="text-center text-laudok-light">
-            © {new Date().getFullYear()} LAUDOK. Todos os direitos reservados.
+            © {new Date().getFullYear()} Laudok! Todos os direitos reservados.
           </p>
         </div>
       </div>

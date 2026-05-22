@@ -2,11 +2,10 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ContactForm from '@/components/contato/ContactForm';
 import ContactInfo from '@/components/contato/ContactInfo';
-import WhatsAppButton from '@/components/contato/WhatsAppButton';
 
 export const metadata = {
-  title: 'Contato - Laudok',
-  description: 'Entre em contato com a Laudok. Estamos prontos para ajudar você com laudos de engenharia.',
+  title: 'Contato - Laudok!',
+  description: 'Entre em contato com a Laudok! Estamos prontos para ajudar você com laudos de engenharia.',
 };
 
 export default function ContatoPage() {
@@ -36,9 +35,6 @@ export default function ContatoPage() {
               {/* Contact Info */}
               <div>
                 <ContactInfo />
-                <div className="mt-8">
-                  <WhatsAppButton />
-                </div>
               </div>
 
               {/* Contact Form */}

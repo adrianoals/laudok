@@ -1,4 +1,22 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Instagram, Youtube } from 'lucide-react';
+
+const socials = [
+  {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/laudok',
+  },
+  {
+    icon: Instagram,
+    label: 'Instagram',
+    href: 'https://instagram.com/laudo.ok',
+  },
+  {
+    icon: Youtube,
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@Laudok',
+  },
+];
 
 export default function ContactInfo() {
   return (
@@ -31,27 +49,30 @@ export default function ContactInfo() {
 
         <div className="flex items-start gap-4">
           <div className="p-3 bg-laudok-light rounded-lg">
-            <Phone className="w-6 h-6 text-laudok" />
-          </div>
-          <div>
-            <h3 className="font-semibold text-laudok-dark mb-1">Telefone</h3>
-            <a
-              href="tel:+5511999999999"
-              className="text-laudok hover:underline"
-            >
-              (11) 99999-9999
-            </a>
-          </div>
-        </div>
-
-        <div className="flex items-start gap-4">
-          <div className="p-3 bg-laudok-light rounded-lg">
             <MapPin className="w-6 h-6 text-laudok" />
           </div>
           <div>
             <h3 className="font-semibold text-laudok-dark mb-1">Localização</h3>
             <p className="text-gray-600">São Paulo, SP</p>
           </div>
+        </div>
+      </div>
+
+      <div className="pt-6 border-t border-gray-200">
+        <h3 className="font-semibold text-laudok-dark mb-4">Redes Sociais</h3>
+        <div className="flex gap-3">
+          {socials.map(({ icon: Icon, label, href }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="p-3 bg-laudok-light rounded-lg text-laudok hover:bg-laudok hover:text-white transition-colors"
+            >
+              <Icon className="w-5 h-5" />
+            </a>
+          ))}
         </div>
       </div>
 
@@ -63,4 +84,3 @@ export default function ContactInfo() {
     </div>
   );
 }
-

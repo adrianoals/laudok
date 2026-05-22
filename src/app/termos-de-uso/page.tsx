@@ -3,8 +3,8 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Termos de Uso - Laudok',
-  description: 'Termos de Uso do Laudok - Condições e regras de utilização da plataforma.',
+  title: 'Termos de Uso - Laudok!',
+  description: 'Termos de Uso do Laudok! - Condições e regras de utilização da plataforma.',
 };
 
 export default function TermsOfUse() {
@@ -26,7 +26,7 @@ export default function TermsOfUse() {
               1. Aceitação dos Termos
             </h2>
             <p className="text-gray-600">
-              Ao acessar e utilizar a plataforma Laudok, você concorda em cumprir estes Termos de Uso e todas as leis e 
+              Ao acessar e utilizar a plataforma Laudok!, você concorda em cumprir estes Termos de Uso e todas as leis e
               regulamentos aplicáveis. Se você não concordar com qualquer parte destes termos, não poderá acessar a plataforma.
             </p>
           </section>
@@ -36,13 +36,13 @@ export default function TermsOfUse() {
               2. Uso da Plataforma
             </h2>
             <p className="text-gray-600">
-              A plataforma Laudok é destinada a:
+              A plataforma Laudok! é destinada a:
             </p>
             <ul className="list-disc pl-6 text-gray-600 mt-4">
               <li>Profissionais de engenharia e arquitetura</li>
               <li>Empresas do setor de construção civil</li>
               <li>Administradores de condomínios</li>
-              <li>Usuários autorizados pela Laudok</li>
+              <li>Usuários autorizados pela Laudok!</li>
             </ul>
           </section>
 
@@ -66,7 +66,7 @@ export default function TermsOfUse() {
               4. Propriedade Intelectual
             </h2>
             <p className="text-gray-600">
-              Todo o conteúdo, funcionalidades e design da plataforma Laudok são protegidos por direitos autorais, 
+              Todo o conteúdo, funcionalidades e design da plataforma Laudok! são protegidos por direitos autorais,
               marcas registradas e outras leis de propriedade intelectual. O uso não autorizado pode resultar em 
               ações legais.
             </p>
@@ -77,7 +77,7 @@ export default function TermsOfUse() {
               5. Limitação de Responsabilidade
             </h2>
             <p className="text-gray-600">
-              A Laudok não se responsabiliza por:
+              A Laudok! não se responsabiliza por:
             </p>
             <ul className="list-disc pl-6 text-gray-600 mt-4">
               <li>Danos causados por uso inadequado da plataforma</li>

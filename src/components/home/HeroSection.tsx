@@ -38,18 +38,12 @@ export default function HeroSection() {
               >
                 Experimente Grátis
               </Link>
-              <Link
-                href="/contato"
-                className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white bg-laudok-dark hover:bg-laudok hover:scale-105 hover:shadow-xl transition-all duration-300"
-              >
-                Fale com um Especialista
-              </Link>
             </div>
           </div>
           {/* <div className="relative h-[400px] lg:h-[500px]">
             <Image
               src="/hero-image.png"
-              alt="Laudok Platform Preview"
+              alt="Laudok! Platform Preview"
               fill
               className="object-contain"
               priority

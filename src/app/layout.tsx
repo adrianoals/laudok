@@ -6,22 +6,22 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://laudok.vercel.app"),
-  title: "Laudok - Laudos de Engenharia Inteligentes",
+  title: "Laudok! - Laudos de Engenharia Inteligentes",
   description: "Plataforma especializada em laudos de engenharia para condomínios. Simplifique a gestão de laudos técnicos com nossa solução inteligente.",
   openGraph: {
-    title: "Laudok - Laudos de Engenharia Inteligentes",
+    title: "Laudok! - Laudos de Engenharia Inteligentes",
     description: "Plataforma especializada em laudos de engenharia para condomínios.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Laudok - Laudos de Engenharia Inteligentes",
+        alt: "Laudok! - Laudos de Engenharia Inteligentes",
       },
     ],
     type: "website",
     locale: "pt_BR",
-    siteName: "Laudok",
+    siteName: "Laudok!",
   },
   icons: {
     icon: "/favicon.ico",

@@ -141,13 +141,12 @@ export default function ContactForm() {
             htmlFor="phone"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Telefone *
+            Telefone <span className="text-gray-400 font-normal">(opcional)</span>
           </label>
           <input
             type="tel"
             id="phone"
             name="phone"
-            required
             value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors"

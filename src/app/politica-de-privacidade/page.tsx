@@ -3,8 +3,8 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidade - Laudok',
-  description: 'Política de Privacidade do Laudok - Proteção e uso de dados.',
+  title: 'Política de Privacidade - Laudok!',
+  description: 'Política de Privacidade do Laudok! - Proteção e uso de dados.',
 };
 
 export default function PrivacyPolicy() {
@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
               1. Introdução
             </h2>
             <p className="text-gray-600">
-              A Laudok está comprometida em proteger sua privacidade. Esta Política de Privacidade explica como coletamos, 
+              A Laudok! está comprometida em proteger sua privacidade. Esta Política de Privacidade explica como coletamos,
               usamos, divulgamos e protegemos suas informações pessoais quando você utiliza nossos serviços.
             </p>
           </section>

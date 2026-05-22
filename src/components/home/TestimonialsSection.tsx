@@ -11,7 +11,7 @@ const testimonials = [
     role: 'Engenheiro Civil',
     company: 'Construtora XYZ',
     image: '/images/engineer-1.jpg',
-    content: 'O LAUDOK!-PRÓ revolucionou nossa forma de trabalhar. Conseguimos reduzir o tempo de elaboração dos laudos em mais de 70% e a qualidade melhorou significativamente.',
+    content: 'O Laudok! revolucionou nossa forma de trabalhar. Conseguimos reduzir o tempo de elaboração dos laudos em mais de 70% e a qualidade melhorou significativamente.',
     rating: 5,
   },
   {
@@ -35,7 +35,7 @@ const testimonials = [
     role: 'Engenheira Civil e Professora',
     company: 'Universidade Federal',
     image: '/images/engineer-3.jpg',
-    content: 'Como professora, posso dizer que o LAUDOK!-PRÓ é uma ferramenta essencial para nossos alunos. A interface intuitiva e a conformidade com as normas técnicas tornam o aprendizado muito mais prático e eficiente.',
+    content: 'Como professora, posso dizer que o Laudok! é uma ferramenta essencial para nossos alunos. A interface intuitiva e a conformidade com as normas técnicas tornam o aprendizado muito mais prático e eficiente.',
     rating: 5,
   },
   {
@@ -43,7 +43,7 @@ const testimonials = [
     role: 'Arquiteto',
     company: 'Studio de Arquitetura',
     image: '/images/architect-2.jpg',
-    content: 'A precisão e rapidez na geração de laudos técnicos com o LAUDOK!-PRÓ nos permite focar mais no design e menos na burocracia. Uma ferramenta indispensável para arquitetos modernos.',
+    content: 'A precisão e rapidez na geração de laudos técnicos com o Laudok! nos permite focar mais no design e menos na burocracia. Uma ferramenta indispensável para arquitetos modernos.',
     rating: 5,
   },
 ];
@@ -86,7 +86,7 @@ export default function TestimonialsSection() {
             O que nossos clientes dizem
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Profissionais que já transformaram sua produtividade com o LAUDOK!-PRÓ
+            Profissionais que já transformaram sua produtividade com o Laudok!
           </p>
         </div>
 

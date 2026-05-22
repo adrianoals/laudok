@@ -12,10 +12,10 @@ export async function POST(request: NextRequest) {
     const body: ContactFormData = await request.json();
     const { name, email, phone, message } = body;
 
-    // Validação básica
-    if (!name || !email || !phone || !message) {
+    // Validação básica (telefone é opcional)
+    if (!name || !email || !message) {
       return NextResponse.json(
-        { error: 'Todos os campos são obrigatórios' },
+        { error: 'Nome, e-mail e mensagem são obrigatórios' },
         { status: 400 }
       );
     }

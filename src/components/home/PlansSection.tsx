@@ -1,16 +1,143 @@
 "use client";
 
-import { useCallback, useState } from 'react';
-import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 
+interface Plan {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: string;
+  perLaudoPrice: string;
+  features: string[];
+  cta: string;
+  highlighted: boolean;
+}
+
+const plans: Plan[] = [
+  {
+    id: 'avulso',
+    name: 'Avulso',
+    description: 'Elaboração de apenas 1 laudo',
+    monthlyPrice: 'R$ 0',
+    perLaudoPrice: 'R$ 890',
+    features: [
+      'Sem assinatura mensal',
+      '1 laudo gerado',
+      'Conformidade com NBR 16.747/2020',
+      'Suporte por e-mail',
+    ],
+    cta: 'Começar Agora',
+    highlighted: false,
+  },
+  {
+    id: 'semestral',
+    name: 'Assinatura 6 meses',
+    description: 'Para uso recorrente em projetos contínuos',
+    monthlyPrice: 'R$ 170',
+    perLaudoPrice: 'R$ 270',
+    features: [
+      'Assinatura semestral',
+      'Laudos sob demanda',
+      'Conformidade com NBR 16.747/2020',
+      'Suporte prioritário',
+      'Renovação automática',
+    ],
+    cta: 'Assinar 6 meses',
+    highlighted: false,
+  },
+  {
+    id: 'anual',
+    name: 'Assinatura 12 meses',
+    description: 'Melhor custo-benefício para uso intensivo',
+    monthlyPrice: 'R$ 160',
+    perLaudoPrice: 'R$ 240',
+    features: [
+      'Assinatura anual',
+      'Menor custo por laudo',
+      'Laudos sob demanda',
+      'Conformidade com NBR 16.747/2020',
+      'Suporte prioritário',
+      'Renovação automática',
+    ],
+    cta: 'Assinar 12 meses',
+    highlighted: true,
+  },
+];
+
+function PlanCard({ plan, onSelect }: { plan: Plan; onSelect: (id: string) => void }) {
+  return (
+    <div
+      className={`rounded-lg shadow-laudok divide-y divide-gray-200 hover:shadow-laudok-dark transition-all duration-300 hover:scale-105 bg-white ${
+        plan.highlighted ? 'border-2 border-laudok relative' : 'border border-gray-200'
+      }`}
+    >
+      {plan.highlighted && (
+        <div className="absolute md:-top-3 md:right-4 top-2 right-2 z-10">
+          <span className="inline-flex rounded-full bg-laudok-dark px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+            Mais Popular
+          </span>
+        </div>
+      )}
+      <div className="p-6">
+        <h3 className="text-lg font-medium text-laudok-dark">{plan.name}</h3>
+        <p className="mt-4 text-sm text-gray-600 min-h-[40px]">{plan.description}</p>
+
+        <div className="mt-8 space-y-2">
+          <div>
+            <span className="text-4xl font-extrabold text-laudok-dark">{plan.monthlyPrice}</span>
+            <span className="text-base font-medium text-gray-500">/mês</span>
+          </div>
+          <div className="text-sm text-gray-600">
+            + <span className="font-semibold text-laudok-dark">{plan.perLaudoPrice}</span> por laudo gerado
+          </div>
+        </div>
+
+        <button
+          onClick={() => onSelect(plan.id)}
+          className="mt-8 block w-full bg-laudok-dark border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-laudok transition-colors"
+        >
+          {plan.cta}
+        </button>
+      </div>
+      <div className="pt-6 pb-8 px-6">
+        <h4 className="text-sm font-medium text-laudok-dark tracking-wide uppercase">
+          O que está incluso
+        </h4>
+        <ul className="mt-6 space-y-4">
+          {plan.features.map((feature) => (
+            <li key={feature} className="flex space-x-3">
+              <svg
+                className="flex-shrink-0 h-5 w-5 text-laudok"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span className="text-sm text-gray-600">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 export default function PlansSection() {
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     loop: true,
     slidesToScroll: 1,
-    startIndex: 1, // Começa com o plano Profissional (índice 1)
+    startIndex: 2, // Começa com o plano anual (12 meses)
   });
 
   const scrollPrev = useCallback(() => {
@@ -21,181 +148,27 @@ export default function PlansSection() {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const handlePlanClick = async (planId: string, checkoutUrl: string) => {
-    // Se for Enterprise, redirecionar para contato
-    if (planId === 'enterprise') {
-      window.location.href = checkoutUrl;
-      return;
-    }
-
-    setLoadingPlan(planId);
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ planId }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (data.redirectTo) {
-          window.location.href = data.redirectTo;
-          return;
-        }
-        throw new Error(data.error || 'Erro ao criar checkout');
-      }
-
-      // Redirecionar para o Stripe Checkout
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('URL de checkout não retornada');
-      }
-    } catch (error) {
-      console.error('Erro ao processar checkout:', error);
-      alert('Erro ao processar checkout. Tente novamente.');
-      setLoadingPlan(null);
-    }
+  const handlePlanClick = () => {
+    router.push('/em-breve');
   };
-
-  const plans = [
-    {
-      id: 'basico',
-      name: 'Básico',
-      price: 'R$ 299',
-      period: '/mês',
-      description: 'Ideal para condomínios pequenos',
-      features: [
-        'Até 50 unidades',
-        'Laudos mensais',
-        'Suporte por email',
-        'Relatórios básicos',
-        'Notificações automáticas',
-      ],
-      cta: 'Começar Agora',
-      highlighted: false,
-      checkoutUrl: '/contato',
-    },
-    {
-      id: 'profissional',
-      name: 'Profissional',
-      price: 'R$ 599',
-      period: '/mês',
-      description: 'Perfeito para condomínios médios',
-      features: [
-        'Até 200 unidades',
-        'Laudos mensais e trimestrais',
-        'Suporte prioritário',
-        'Relatórios avançados',
-        'Notificações automáticas',
-        'API de integração',
-      ],
-      cta: 'Começar Agora',
-      highlighted: true,
-      checkoutUrl: '/contato',
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise',
-      price: 'Sob consulta',
-      period: '',
-      description: 'Para grandes condomínios e redes',
-      features: [
-        'Unidades ilimitadas',
-        'Laudos personalizados',
-        'Suporte 24/7',
-        'Relatórios customizados',
-        'API de integração',
-        'Treinamento da equipe',
-      ],
-      cta: 'Fale Conosco',
-      highlighted: false,
-      checkoutUrl: '/contato',
-    },
-  ];
 
   return (
     <section id="plans" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-base text-laudok-dark font-bold tracking-wide uppercase">Planos</h2>
+          <h2 className="text-base text-laudok-dark font-bold tracking-wide uppercase">Planos e Preços</h2>
           <p className="mt-2 text-3xl font-extrabold text-laudok-dark sm:text-4xl">
-            Escolha o plano ideal para seu condomínio
+            Escolha o plano ideal para o seu uso
           </p>
           <p className="mt-4 text-xl text-gray-500">
-            Soluções flexíveis para atender às necessidades do seu condomínio
+            Pague apenas pelo que usar. Cada plano combina uma mensalidade fixa com o valor por laudo gerado.
           </p>
         </div>
 
         {/* Desktop View */}
         <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 lg:mt-12 lg:max-w-4xl lg:mx-auto xl:max-w-none">
           {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`rounded-lg shadow-laudok divide-y divide-gray-200 hover:shadow-laudok-dark transition-all duration-300 hover:scale-105 ${
-                plan.highlighted
-                  ? 'border-2 border-laudok relative'
-                  : 'border border-gray-200'
-              }`}
-            >
-              {plan.highlighted && (
-                <div className="absolute md:-top-3 md:right-4 top-2 right-2 z-10">
-                  <span className="inline-flex rounded-full bg-laudok-dark px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-                    Mais Popular
-                  </span>
-                </div>
-              )}
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-laudok-dark">{plan.name}</h3>
-                <p className="mt-4 text-sm text-gray-600">{plan.description}</p>
-                <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-laudok-dark">{plan.price}</span>
-                  <span className="text-base font-medium text-gray-500">{plan.period}</span>
-                </p>
-                <button
-                  onClick={() => handlePlanClick(plan.id, plan.checkoutUrl)}
-                  disabled={loadingPlan === plan.id}
-                  className={`mt-8 block w-full bg-laudok-dark border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-laudok-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
-                >
-                  {loadingPlan === plan.id ? (
-                    <span className="flex items-center justify-center">
-                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                      Processando...
-                    </span>
-                  ) : (
-                    plan.cta
-                  )}
-                </button>
-              </div>
-              <div className="pt-6 pb-8 px-6">
-                <h4 className="text-sm font-medium text-laudok-dark tracking-wide uppercase">
-                  O que está incluso
-                </h4>
-                <ul className="mt-6 space-y-4">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex space-x-3">
-                      <svg
-                        className="flex-shrink-0 h-5 w-5 text-laudok"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span className="text-sm text-gray-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <PlanCard key={plan.id} plan={plan} onSelect={handlePlanClick} />
           ))}
         </div>
 
@@ -206,77 +179,15 @@ export default function PlansSection() {
               <div className="flex">
                 {plans.map((plan) => (
                   <div
-                    key={plan.name}
+                    key={plan.id}
                     className="flex-[0_0_100%] md:flex-[0_0_50%] min-w-0 px-4"
                   >
-                    <div
-                      className={`rounded-lg shadow-laudok divide-y divide-gray-200 hover:shadow-laudok-dark transition-all duration-300 hover:scale-105 ${
-                        plan.highlighted
-                          ? 'border-2 border-laudok relative'
-                          : 'border border-gray-200'
-                      }`}
-                    >
-                      {plan.highlighted && (
-                        <div className="absolute md:-top-3 md:right-4 top-2 right-2 z-10">
-                          <span className="inline-flex rounded-full bg-laudok-dark px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-                            Mais Popular
-                          </span>
-                        </div>
-                      )}
-                      <div className="p-6">
-                        <h3 className="text-lg font-medium text-laudok-dark">{plan.name}</h3>
-                        <p className="mt-4 text-sm text-gray-600">{plan.description}</p>
-                        <p className="mt-8">
-                          <span className="text-4xl font-extrabold text-laudok-dark">{plan.price}</span>
-                          <span className="text-base font-medium text-gray-500">{plan.period}</span>
-                        </p>
-                        <button
-                          onClick={() => handlePlanClick(plan.id, plan.checkoutUrl)}
-                          disabled={loadingPlan === plan.id}
-                          className={`mt-8 block w-full bg-laudok-dark border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-laudok-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
-                        >
-                          {loadingPlan === plan.id ? (
-                            <span className="flex items-center justify-center">
-                              <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                              Processando...
-                            </span>
-                          ) : (
-                            plan.cta
-                          )}
-                        </button>
-                      </div>
-                      <div className="pt-6 pb-8 px-6">
-                        <h4 className="text-sm font-medium text-laudok-dark tracking-wide uppercase">
-                          O que está incluído
-                        </h4>
-                        <ul className="mt-6 space-y-4">
-                          {plan.features.map((feature) => (
-                            <li key={feature} className="flex space-x-3">
-                              <svg
-                                className="flex-shrink-0 h-5 w-5 text-laudok"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                              <span className="text-sm text-gray-600">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                    <PlanCard plan={plan} onSelect={handlePlanClick} />
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Navigation Buttons */}
             <button
               onClick={scrollPrev}
               className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg z-10 -ml-4"

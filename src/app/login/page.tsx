@@ -3,8 +3,8 @@ import Footer from '@/components/layout/Footer';
 import LoginForm from '@/components/login/LoginForm';
 
 export const metadata = {
-  title: 'Login - Laudok',
-  description: 'Faça login na sua conta Laudok para acessar a plataforma de laudos de engenharia.',
+  title: 'Login - Laudok!',
+  description: 'Faça login na sua conta Laudok! para acessar a plataforma de laudos de engenharia.',
 };
 
 export default function LoginPage() {

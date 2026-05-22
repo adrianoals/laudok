@@ -16,7 +16,7 @@ export default function Header() {
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/logo.svg"
-                alt="LAUDOK!-PRÓ Logo"
+                alt="Laudok! Logo"
                 width={160}
                 height={40}
                 className="h-10 w-auto"
@@ -105,11 +105,11 @@ export default function Header() {
                       Depoimentos
                     </Link>
                     <Link
-                      href="#faq"
+                      href="/faq"
                       className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      FAQ
+                      Perguntas Frequentes
                     </Link>
                     <Link
                       href="/#plans"
@@ -118,15 +118,6 @@ export default function Header() {
                     >
                       Planos e Preços
                     </Link>
-                    <div className="pt-4 pb-3 border-t border-gray-200">
-                      <Link
-                        href="/contato"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-laudok hover:bg-laudok-light transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Fale com um Especialista
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>
