@@ -161,69 +161,71 @@ export default function FAQContent() {
       </aside>
 
       <div className="lg:col-span-8">
-        <div className="relative mb-8">
-          <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
-          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faded" />
-          <input
-            id="faq-search"
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar por palavra-chave..."
-            className="w-full rounded-full border border-sand-200 bg-surface py-3.5 pl-12 pr-4 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors"
-          />
-        </div>
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 lg:p-6">
+          <div className="relative mb-5">
+            <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
+            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faded" />
+            <input
+              id="faq-search"
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar por palavra-chave..."
+              className="w-full rounded-full border border-laudok-200/70 bg-surface py-3.5 pl-12 pr-4 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-4 focus:ring-laudok-500/15 focus:border-laudok-500 transition-all"
+            />
+          </div>
 
-        <div className="space-y-3">
-          {filtered.length === 0 ? (
-            <Card variant="flat" className="p-10 text-center text-ink-muted">
-              Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
-            </Card>
-          ) : (
-            filtered.map((faq, index) => {
-              const isOpen = openIndex === index;
-              return (
-                <Card
-                  key={faq.question}
-                  variant={isOpen ? 'emboss' : 'flat'}
-                  withFillet={isOpen}
-                  className={
-                    isOpen
-                      ? 'overflow-hidden'
-                      : 'overflow-hidden bg-laudok-50/50 border-laudok-200 hover:bg-laudok-50 hover:border-laudok-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] transition-all duration-200 cursor-pointer'
-                  }
-                >
-                  <button
-                    type="button"
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
-                    onClick={() => setOpenIndex(isOpen ? null : index)}
-                    aria-expanded={isOpen}
+          <div className="space-y-3">
+            {filtered.length === 0 ? (
+              <Card variant="flat" className="p-10 text-center text-ink-muted">
+                Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
+              </Card>
+            ) : (
+              filtered.map((faq, index) => {
+                const isOpen = openIndex === index;
+                return (
+                  <Card
+                    key={faq.question}
+                    variant={isOpen ? 'emboss' : 'flat'}
+                    withFillet={isOpen}
+                    className={
+                      isOpen
+                        ? 'overflow-hidden'
+                        : 'overflow-hidden shadow-[0_1px_3px_rgba(3,69,117,0.05)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] transition-all duration-200 cursor-pointer'
+                    }
                   >
-                    <span className="text-body font-semibold text-laudok-900">{faq.question}</span>
-                    <span
-                      className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                        isOpen
-                          ? 'bg-laudok-800 text-surface'
-                          : 'bg-laudok-100 text-laudok-700'
-                      }`}
-                      aria-hidden
+                    <button
+                      type="button"
+                      className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                      onClick={() => setOpenIndex(isOpen ? null : index)}
+                      aria-expanded={isOpen}
                     >
-                      <ChevronDown
-                        size={16}
-                        strokeWidth={2.5}
-                        className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                      />
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div className="px-6 pb-6">
-                      <p className="text-body text-ink-muted leading-relaxed">{faq.answer}</p>
-                    </div>
-                  )}
-                </Card>
-              );
-            })
-          )}
+                      <span className="text-body font-semibold text-laudok-900">{faq.question}</span>
+                      <span
+                        className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                          isOpen
+                            ? 'bg-laudok-800 text-surface'
+                            : 'bg-laudok-100 text-laudok-700'
+                        }`}
+                        aria-hidden
+                      >
+                        <ChevronDown
+                          size={16}
+                          strokeWidth={2.5}
+                          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                        />
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-6 pb-6">
+                        <p className="text-body text-ink-muted leading-relaxed">{faq.answer}</p>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
     </div>
