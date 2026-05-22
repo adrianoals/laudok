@@ -18,9 +18,12 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-laudok-900 text-surface">
-      <NewsletterSignup />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <footer className="relative bg-laudok-900 text-surface overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-laudok opacity-90" aria-hidden />
+      <div className="absolute inset-0 bg-grid-blueprint-light bg-grid-blueprint--masked opacity-30 pointer-events-none" aria-hidden />
+      <div className="relative">
+        <NewsletterSignup />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
           <div className="md:col-span-5">
             <Link href="/" className="inline-block mb-4">
@@ -88,6 +91,7 @@ export default function Footer() {
           <p className="text-laudok-300">
             © {new Date().getFullYear()} Laudok! Todos os direitos reservados.
           </p>
+        </div>
         </div>
       </div>
     </footer>
