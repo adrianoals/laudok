@@ -126,7 +126,7 @@ export default function FAQContent() {
           <Eyebrow>Filtrar por categoria</Eyebrow>
           <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden md:block">Categorias</h2>
 
-          <div className="flex md:flex-col gap-3 mt-4 md:mt-0 overflow-x-auto md:overflow-visible pb-1 -mx-5 px-5 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="grid grid-cols-2 gap-3 mt-4 md:flex md:flex-col md:gap-3 md:mt-0">
             {categories.map((cat) => {
               const active = activeCategory === cat.id;
               const count = countByCategory[cat.id];
@@ -136,17 +136,17 @@ export default function FAQContent() {
                   type="button"
                   onClick={() => handleCategoryChange(cat.id)}
                   aria-pressed={active}
-                  className="flex-shrink-0 md:flex-shrink md:w-full text-left snap-start"
+                  className="text-left"
                 >
                   <Card
                     variant={active ? 'emboss' : 'flat'}
                     withFillet={active}
                     hoverable={!active}
-                    className="px-3 py-2.5 md:p-4 flex items-center gap-2.5 md:gap-4 whitespace-nowrap md:whitespace-normal md:min-w-0"
+                    className="px-3 py-3 md:p-4 flex items-center gap-2.5 md:gap-4 h-full min-w-0"
                   >
                     <IconTile icon={cat.icon} tone={active ? 'filled' : 'soft'} size="sm" />
                     <div className="flex-grow min-w-0">
-                      <div className="text-body-s md:text-body font-semibold text-laudok-900">{cat.label}</div>
+                      <div className="text-body-s md:text-body font-semibold text-laudok-900 leading-tight">{cat.label}</div>
                       <div className="text-caption text-ink-muted mt-0.5 hidden md:block">
                         {count} {count === 1 ? 'pergunta' : 'perguntas'}
                       </div>
