@@ -121,7 +121,7 @@ export default function FAQContent() {
 
   return (
     <div className="grid md:grid-cols-12 gap-8 md:gap-10 lg:gap-12">
-      <aside className="md:col-span-5 lg:col-span-4">
+      <aside className="md:col-span-5 lg:col-span-4 min-w-0">
         <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 md:p-6 md:sticky md:top-24">
           <Eyebrow>Filtrar por categoria</Eyebrow>
           <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden md:block">Categorias</h2>
@@ -160,7 +160,7 @@ export default function FAQContent() {
         </div>
       </aside>
 
-      <div className="md:col-span-7 lg:col-span-8">
+      <div className="md:col-span-7 lg:col-span-8 min-w-0">
         <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 md:p-6">
           <div className="relative mb-5">
             <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
@@ -196,11 +196,11 @@ export default function FAQContent() {
                   >
                     <button
                       type="button"
-                      className="w-full px-4 py-4 md:px-6 md:py-5 text-left flex items-center justify-between gap-3 md:gap-4"
+                      className="w-full max-w-full px-4 py-4 md:px-6 md:py-5 text-left flex items-center justify-between gap-3 md:gap-4 overflow-hidden"
                       onClick={() => setOpenIndex(isOpen ? null : index)}
                       aria-expanded={isOpen}
                     >
-                      <span className="flex-1 min-w-0 text-body-s md:text-body font-semibold text-laudok-900">
+                      <span className="flex-1 min-w-0 break-words text-body-s md:text-body font-semibold text-laudok-900 leading-snug">
                         {faq.question}
                       </span>
                       <span
