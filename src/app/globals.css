@@ -40,11 +40,6 @@
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-inout: cubic-bezier(0.6, 0, 0.4, 1);
-
-  /* Legacy aliases (compat com componentes ainda não migrados) */
-  --laudok:        var(--laudok-500);
-  --laudok-dark:   var(--laudok-800);
-  --laudok-light:  var(--laudok-100);
 }
 
 @theme inline {
@@ -69,11 +64,6 @@
   --color-surface:     var(--surface);
   --color-surface-alt: var(--surface-alt);
 
-  /* Aliases legados */
-  --color-laudok:       var(--laudok-500);
-  --color-laudok-dark:  var(--laudok-800);
-  --color-laudok-light: var(--laudok-100);
-
   /* Fontes */
   --font-sans:    var(--font-inter), Inter, system-ui, sans-serif;
   --font-display: var(--font-display), 'Bricolage Grotesque', sans-serif;
@@ -82,8 +72,6 @@
   --shadow-card:   var(--shadow-card);
   --shadow-emboss: var(--shadow-emboss);
   --shadow-hover:  var(--shadow-hover);
-  --shadow-laudok:      var(--shadow-card);   /* alias legado */
-  --shadow-laudok-dark: var(--shadow-hover);  /* alias legado */
 
   /* Radii */
   --radius-sm:  4px;

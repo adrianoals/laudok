@@ -1,66 +1,45 @@
-import { Mail, MapPin, Linkedin, Instagram, Youtube } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Instagram, Youtube, type LucideIcon } from 'lucide-react';
+import { IconTile } from '@/components/ui';
 
-const socials = [
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/laudok',
-  },
-  {
-    icon: Instagram,
-    label: 'Instagram',
-    href: 'https://instagram.com/laudo.ok',
-  },
-  {
-    icon: Youtube,
-    label: 'YouTube',
-    href: 'https://www.youtube.com/@Laudok',
-  },
+const socials: { icon: LucideIcon; label: string; href: string }[] = [
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/laudok' },
+  { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/laudo.ok' },
+  { icon: Youtube, label: 'YouTube', href: 'https://www.youtube.com/@Laudok' },
 ];
 
 export default function ContactInfo() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div>
-        <h2 className="text-2xl font-bold text-laudok-dark mb-6">
-          Entre em Contato
-        </h2>
-        <p className="text-gray-600 mb-8">
-          Estamos prontos para ajudar você. Entre em contato conosco através
-          dos canais abaixo ou preencha o formulário ao lado.
+        <div className="text-label text-laudok-700 mb-3">Fale com a gente</div>
+        <h2 className="text-display-m text-laudok-900 mb-4">Entre em contato.</h2>
+        <p className="text-body text-ink-muted">
+          Estamos prontos para ajudar você. Use os canais abaixo ou preencha o formulário ao lado.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         <div className="flex items-start gap-4">
-          <div className="p-3 bg-laudok-light rounded-lg">
-            <Mail className="w-6 h-6 text-laudok" />
-          </div>
+          <IconTile icon={Mail} tone="soft" size="md" />
           <div>
-            <h3 className="font-semibold text-laudok-dark mb-1">E-mail</h3>
-            <a
-              href="mailto:contato@laudok.com.br"
-              className="text-laudok hover:underline"
-            >
+            <div className="text-label text-laudok-700 mb-1">E-mail</div>
+            <a href="mailto:contato@laudok.com.br" className="text-body text-ink hover:text-laudok-500 transition-colors">
               contato@laudok.com.br
             </a>
           </div>
         </div>
-
         <div className="flex items-start gap-4">
-          <div className="p-3 bg-laudok-light rounded-lg">
-            <MapPin className="w-6 h-6 text-laudok" />
-          </div>
+          <IconTile icon={MapPin} tone="soft" size="md" />
           <div>
-            <h3 className="font-semibold text-laudok-dark mb-1">Localização</h3>
-            <p className="text-gray-600">São Paulo, SP</p>
+            <div className="text-label text-laudok-700 mb-1">Localização</div>
+            <p className="text-body text-ink">São Paulo, SP</p>
           </div>
         </div>
       </div>
 
-      <div className="pt-6 border-t border-gray-200">
-        <h3 className="font-semibold text-laudok-dark mb-4">Redes Sociais</h3>
-        <div className="flex gap-3">
+      <div className="pt-6 border-t border-sand-200">
+        <div className="text-label text-laudok-700 mb-3">Redes sociais</div>
+        <div className="flex gap-2">
           {socials.map(({ icon: Icon, label, href }) => (
             <a
               key={label}
@@ -68,19 +47,17 @@ export default function ContactInfo() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="p-3 bg-laudok-light rounded-lg text-laudok hover:bg-laudok hover:text-white transition-colors"
+              className="w-10 h-10 inline-flex items-center justify-center rounded-md border border-sand-200 text-laudok-800 hover:bg-laudok-800 hover:text-surface hover:border-laudok-800 transition-colors"
             >
-              <Icon className="w-5 h-5" />
+              <Icon size={18} />
             </a>
           ))}
         </div>
       </div>
 
-      <div className="pt-6 border-t border-gray-200">
-        <p className="text-sm text-gray-500">
-          Horário de atendimento: Segunda a Sexta, das 9h às 18h
-        </p>
-      </div>
+      <p className="text-caption text-ink-muted">
+        Horário de atendimento: Segunda a Sexta, das 9h às 18h
+      </p>
     </div>
   );
 }

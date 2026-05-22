@@ -3,128 +3,75 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
+import { LinkButton } from '@/components/ui';
+
+const navLinks = [
+  { href: '/#about', label: 'Sobre' },
+  { href: '/#features', label: 'Funcionalidades' },
+  { href: '/#how-it-works', label: 'Como Funciona' },
+  { href: '/#plans', label: 'Planos' },
+  { href: '/faq', label: 'Perguntas Frequentes' },
+  { href: '/contato', label: 'Contato' },
+];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+    <header className="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-md border-b border-sand-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/images/logo.svg"
-                alt="Laudok! Logo"
-                width={160}
-                height={40}
-                className="h-10 w-auto"
-              />
-            </Link>
-          </div>
-          {/* CTA Buttons + Hamburguer */}
-          <div className="relative flex items-center space-x-4">
-            <Link
-              href="/login"
-              className="hidden sm:inline-flex text-sm font-medium text-laudok-dark hover:text-laudok transition-colors"
-            >
+          <Link href="/" className="flex items-center">
+            <Image src="/images/logo.svg" alt="Laudok! Logo" width={140} height={36} className="h-8 w-auto" />
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="text-body-s font-medium text-ink hover:text-laudok-500 transition-colors">
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <Link href="/login" className="hidden sm:inline-flex text-body-s font-medium text-laudok-800 hover:text-laudok-500 transition-colors">
               Login
             </Link>
-            <Link
-              href="/teste-gratis"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-laudok-dark hover:bg-laudok hover:scale-105 hover:shadow-xl transition-all duration-300 shadow-sm"
-            >
+            <LinkButton href="/teste-gratis" size="sm" className="hidden sm:inline-flex">
               Experimente Grátis
-            </Link>
+            </LinkButton>
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-laudok-dark hover:text-laudok hover:bg-laudok-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-laudok transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md text-laudok-800 hover:bg-sand-100 transition-colors"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              aria-label="Abrir menu"
             >
-              <span className="sr-only">Abrir menu</span>
-              {!isMenuOpen ? (
-                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              ) : (
-                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              )}
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
-            {/* Menu */}
-            {isMenuOpen && (
-              <div className="absolute top-12 right-0 w-64 sm:w-80 bg-white shadow-lg rounded-lg z-50">
-                <div className="px-4 sm:px-6">
-                  <div className="py-4 space-y-1">
-                    {/* Login apenas no mobile */}
-                    <div className="sm:hidden">
-                      <Link
-                        href="/login"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Login
-                      </Link>
-                      <div className="border-t border-gray-200 my-2"></div>
-                    </div>
-                    <Link
-                      href="/"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Início
-                    </Link>
-                    <Link
-                      href="#about"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Sobre
-                    </Link>
-                    <Link
-                      href="#features"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Funcionalidades
-                    </Link>
-                    <Link
-                      href="#how-it-works"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Como Funciona
-                    </Link>
-                    <Link
-                      href="#testimonials"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Depoimentos
-                    </Link>
-                    <Link
-                      href="/faq"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Perguntas Frequentes
-                    </Link>
-                    <Link
-                      href="/#plans"
-                      className="block px-3 py-2 rounded-md text-base font-medium text-laudok-dark hover:text-laudok hover:bg-laudok-light transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Planos e Preços
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className="lg:hidden bg-surface border-t border-sand-200">
+          <nav className="px-4 sm:px-6 py-4 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block px-3 py-2 rounded-md text-body font-medium text-ink hover:text-laudok-500 hover:bg-sand-100 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link href="/login" className="sm:hidden block px-3 py-2 rounded-md text-body font-medium text-laudok-800 hover:bg-sand-100 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Login
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

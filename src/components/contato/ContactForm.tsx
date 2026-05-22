@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { Loader2, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui';
 
 interface FormData {
   name: string;
@@ -14,6 +15,9 @@ interface FormState {
   status: 'idle' | 'loading' | 'success' | 'error';
   message: string;
 }
+
+const inputClasses =
+  'w-full px-4 py-3 rounded-md bg-surface border border-sand-200 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -42,9 +46,7 @@ export default function ContactForm() {
     try {
       const response = await fetch('/api/contato', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
@@ -59,13 +61,7 @@ export default function ContactForm() {
         message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',
       });
 
-      // Limpar formulário
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-      });
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       setFormState({
         status: 'error',
@@ -78,31 +74,26 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-laudok p-8">
-      <h2 className="text-2xl font-bold text-laudok-dark mb-6">
-        Envie sua Mensagem
-      </h2>
+    <div className="bg-surface rounded-2xl shadow-[var(--shadow-emboss)] p-8">
+      <h2 className="text-display-m text-laudok-900 mb-6">Envie sua mensagem</h2>
 
       {formState.status === 'success' && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md flex items-start gap-3">
           <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-          <p className="text-green-700 text-sm">{formState.message}</p>
+          <p className="text-green-700 text-body-s">{formState.message}</p>
         </div>
       )}
 
       {formState.status === 'error' && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-          <p className="text-red-700 text-sm">{formState.message}</p>
+          <p className="text-red-700 text-body-s">{formState.message}</p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="name" className="block text-body-s font-medium text-ink mb-2">
             Nome Completo *
           </label>
           <input
@@ -112,16 +103,13 @@ export default function ContactForm() {
             required
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors"
+            className={inputClasses}
             placeholder="Seu nome completo"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="email" className="block text-body-s font-medium text-ink mb-2">
             E-mail *
           </label>
           <input
@@ -131,17 +119,14 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors"
+            className={inputClasses}
             placeholder="seu@email.com"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            Telefone <span className="text-gray-400 font-normal">(opcional)</span>
+          <label htmlFor="phone" className="block text-body-s font-medium text-ink mb-2">
+            Telefone <span className="text-ink-faded font-normal">(opcional)</span>
           </label>
           <input
             type="tel"
@@ -149,16 +134,13 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors"
+            className={inputClasses}
             placeholder="(11) 99999-9999"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="message" className="block text-body-s font-medium text-ink mb-2">
             Mensagem *
           </label>
           <textarea
@@ -168,16 +150,12 @@ export default function ContactForm() {
             rows={5}
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors resize-none"
+            className={`${inputClasses} resize-none`}
             placeholder="Como podemos ajudá-lo?"
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={formState.status === 'loading'}
-          className="w-full bg-laudok-dark text-white py-3 px-6 rounded-md font-medium hover:bg-laudok transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-        >
+        <Button type="submit" size="lg" disabled={formState.status === 'loading'} className="w-full">
           {formState.status === 'loading' ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -186,12 +164,11 @@ export default function ContactForm() {
           ) : (
             <>
               <Send className="w-5 h-5" />
-              Enviar Mensagem
+              Enviar mensagem
             </>
           )}
-        </button>
+        </Button>
       </form>
     </div>
   );
 }
-

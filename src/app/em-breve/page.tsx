@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Construction } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { Card, IconTile, LinkButton, SectionShell } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: 'Em Breve - Laudok!',
@@ -11,43 +12,27 @@ export const metadata: Metadata = {
 
 export default function EmBrevePage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-surface-alt">
       <Header />
-      <main className="flex-grow flex items-center justify-center pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full text-center space-y-8">
-          <div className="flex justify-center">
-            <div className="p-6 bg-laudok-light rounded-full">
-              <Construction className="w-16 h-16 text-laudok-dark" />
+      <main className="flex-grow pt-16">
+        <SectionShell tone="cream" withGrid>
+          <Card variant="emboss" withFillet className="max-w-xl mx-auto p-10 text-center">
+            <IconTile icon={Construction} tone="soft" size="lg" className="mx-auto mb-6" />
+            <h1 className="text-display-l text-laudok-900 mb-4">Em construção</h1>
+            <p className="text-body-l text-ink-muted mb-3">
+              Estamos finalizando a contratação direta pelo site. Em breve você poderá assinar seu plano com alguns cliques.
+            </p>
+            <p className="text-body text-ink-muted mb-8">
+              Por enquanto, fale com a gente para conhecer os planos e iniciar o cadastro.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <LinkButton href="/contato" size="lg">Falar com a Laudok!</LinkButton>
+              <Link href="/" className="inline-flex items-center justify-center text-body font-medium text-laudok-800 hover:text-laudok-500 transition-colors">
+                Voltar para a Home
+              </Link>
             </div>
-          </div>
-
-          <div className="space-y-4">
-            <h1 className="text-3xl font-bold text-laudok-dark">
-              Em construção
-            </h1>
-            <p className="text-lg text-gray-600">
-              Estamos finalizando a contratação direta pelo site. Em breve você poderá assinar seu plano com apenas alguns cliques.
-            </p>
-            <p className="text-base text-gray-600">
-              Por enquanto, fale com a gente para conhecer os planos e iniciar o seu cadastro.
-            </p>
-          </div>
-
-          <div className="space-y-3 pt-2">
-            <Link
-              href="/contato"
-              className="block w-full bg-laudok-dark text-white py-3 px-4 rounded-md hover:bg-laudok transition-colors font-medium"
-            >
-              Falar com a Laudok!
-            </Link>
-            <Link
-              href="/"
-              className="block w-full text-laudok-dark hover:text-laudok transition-colors font-medium"
-            >
-              Voltar para a Home
-            </Link>
-          </div>
-        </div>
+          </Card>
+        </SectionShell>
       </main>
       <Footer />
     </div>

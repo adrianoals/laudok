@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
+import { Badge, Card } from '@/components/ui';
 
 type CategoryId = 'todos' | 'produto' | 'norma' | 'financeiro' | 'seguranca';
 
@@ -85,14 +86,11 @@ export default function FAQContent() {
     const normalize = (text: string) =>
       text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const term = normalize(search.trim());
-
     return faqs.filter((faq) => {
       const matchCategory = activeCategory === 'todos' || faq.category === activeCategory;
       if (!matchCategory) return false;
       if (!term) return true;
-      return (
-        normalize(faq.question).includes(term) || normalize(faq.answer).includes(term)
-      );
+      return normalize(faq.question).includes(term) || normalize(faq.answer).includes(term);
     });
   }, [activeCategory, search]);
 
@@ -104,18 +102,16 @@ export default function FAQContent() {
   return (
     <div className="space-y-10">
       <div className="max-w-2xl mx-auto">
-        <label htmlFor="faq-search" className="sr-only">
-          Buscar pergunta
-        </label>
+        <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faded" />
           <input
             id="faq-search"
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por palavra-chave..."
-            className="w-full rounded-full border border-gray-200 bg-white py-3 pl-12 pr-4 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-laudok focus:border-transparent"
+            className="w-full rounded-full border border-sand-200 bg-surface py-3 pl-12 pr-4 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-2 focus:ring-laudok-300 focus:border-laudok-500 transition-colors"
           />
         </div>
       </div>
@@ -124,53 +120,40 @@ export default function FAQContent() {
         {categories.map((category) => {
           const isActive = activeCategory === category.id;
           return (
-            <button
-              key={category.id}
-              type="button"
-              onClick={() => handleCategoryChange(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
-                isActive
-                  ? 'bg-laudok-dark text-white border-laudok-dark'
-                  : 'bg-white text-laudok-dark border-gray-200 hover:bg-laudok-light hover:border-laudok'
-              }`}
-            >
-              {category.label}
+            <button key={category.id} type="button" onClick={() => handleCategoryChange(category.id)} aria-pressed={isActive}>
+              <Badge variant={isActive ? 'solid' : 'outline'} size="md">{category.label}</Badge>
             </button>
           );
         })}
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-4">
+      <div className="max-w-3xl mx-auto space-y-3">
         {filtered.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-dashed border-gray-300 p-10 text-center text-gray-500">
+          <Card variant="flat" className="p-10 text-center text-ink-muted">
             Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
-          </div>
+          </Card>
         ) : (
           filtered.map((faq, index) => (
-            <div
-              key={faq.question}
-              className="bg-white rounded-2xl shadow-laudok overflow-hidden border border-laudok-dark/30 transition-all duration-300"
-            >
+            <Card key={faq.question} variant="flat" className="overflow-hidden">
               <button
-                className="w-full px-6 py-4 text-left flex items-center justify-between gap-4"
+                className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 aria-expanded={openIndex === index}
               >
-                <span className="text-lg font-medium text-laudok-dark">
-                  {faq.question}
-                </span>
+                <span className="text-display-s text-laudok-900">{faq.question}</span>
                 <ChevronDown
-                  className={`flex-shrink-0 w-5 h-5 text-laudok transition-transform ${
+                  size={20}
+                  className={`text-laudok-500 transition-transform flex-shrink-0 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-5">
-                  <p className="text-laudok-dark/90 leading-relaxed">{faq.answer}</p>
+                <div className="px-6 pb-6">
+                  <p className="text-body text-ink leading-relaxed">{faq.answer}</p>
                 </div>
               )}
-            </div>
+            </Card>
           ))
         )}
       </div>
