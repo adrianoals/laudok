@@ -10,7 +10,7 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <SectionShell id="how-it-works" tone="cream" withGrid>
+    <SectionShell id="how-it-works" tone="surface" withGrid>
       <div className="max-w-3xl mb-16">
         <Reveal><Eyebrow>Como funciona</Eyebrow></Reveal>
         <Reveal delay={80}>

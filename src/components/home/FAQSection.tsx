@@ -3,7 +3,7 @@ import { Eyebrow, LinkButton, Reveal, SectionShell } from '@/components/ui';
 
 export default function FAQSection() {
   return (
-    <SectionShell id="faq" tone="cream">
+    <SectionShell id="faq" tone="surface">
       <div className="text-center max-w-3xl mx-auto">
         <Reveal>
           <Eyebrow className="justify-center"><span>Perguntas frequentes</span></Eyebrow>

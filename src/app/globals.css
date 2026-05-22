@@ -30,7 +30,7 @@
 
   /* Surfaces */
   --surface:     #ffffff;
-  --surface-alt: #faf7f2;
+  --surface-alt: #ffffff;
 
   /* Shadows (tinta azul) */
   --shadow-card:   0 1px 0 rgba(0,0,0,.04), 0 12px 30px -10px rgba(3,69,117,.18);

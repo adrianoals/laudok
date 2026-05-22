@@ -64,7 +64,7 @@ export default function TestimonialsSection() {
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <SectionShell id="testimonials" tone="cream">
+    <SectionShell id="testimonials" tone="surface">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <Reveal>
           <Eyebrow className="justify-center"><span>Depoimentos</span></Eyebrow>

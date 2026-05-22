@@ -17,7 +17,7 @@ const solutions = [
 
 export default function ProblemSolutionSection() {
   return (
-    <SectionShell tone="cream">
+    <SectionShell tone="surface">
       <div className="max-w-3xl mb-16">
         <Reveal>
           <Eyebrow>O problema · A solução</Eyebrow>

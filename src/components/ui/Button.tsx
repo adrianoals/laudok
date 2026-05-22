@@ -1,7 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import Link from 'next/link';
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'outline';
+type Variant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'inverse' | 'outline-light';
 type Size = 'sm' | 'md' | 'lg';
 
 interface BaseProps {
@@ -32,6 +32,10 @@ const variantClasses: Record<Variant, string> = {
     'text-laudok-800 hover:bg-laudok-100',
   outline:
     'border border-laudok-800 text-laudok-800 hover:bg-laudok-800 hover:text-surface',
+  inverse:
+    'bg-surface text-laudok-900 hover:bg-laudok-100 hover:scale-[1.02] active:scale-100 shadow-[0_4px_12px_-4px_rgba(0,0,0,0.25)]',
+  'outline-light':
+    'border border-surface/40 text-surface hover:bg-surface/10 hover:border-surface',
 };
 
 const sizeClasses: Record<Size, string> = {
