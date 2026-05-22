@@ -15,9 +15,22 @@ const solutions = [
   'Suporte especializado e materiais de treinamento',
 ];
 
+const decorations = (
+  <>
+    <div className="hidden md:block absolute -top-16 -right-20 w-64 h-64 rounded-full border-2 border-laudok-300/50" aria-hidden />
+    <div className="hidden md:block absolute top-16 right-16 w-12 h-12 rounded-full bg-laudok-300/40" aria-hidden />
+    <div className="hidden md:block absolute -bottom-12 -left-12 w-40 h-40 rounded-full border border-laudok-300/60" aria-hidden />
+    <div className="hidden md:block absolute bottom-24 left-16 w-3 h-3 rounded-full bg-laudok-400" aria-hidden />
+    <div className="hidden lg:block absolute top-1/2 right-8 flex items-center gap-2" aria-hidden>
+      <div className="w-10 h-px bg-laudok-300/60" />
+      <div className="w-2 h-2 rounded-full bg-laudok-300/80" />
+    </div>
+  </>
+);
+
 export default function ProblemSolutionSection() {
   return (
-    <SectionShell tone="pale">
+    <SectionShell tone="pale" decorations={decorations}>
       <div className="max-w-3xl mb-16">
         <Reveal>
           <Eyebrow>O problema · A solução</Eyebrow>
