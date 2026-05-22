@@ -1,26 +1,32 @@
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { Eyebrow, LinkButton, Reveal, SectionShell } from '@/components/ui';
 
 export default function FAQSection() {
   return (
-    <section id="faq" className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-laudok-dark mb-4">
-            Perguntas Frequentes
+    <SectionShell id="faq" tone="cream">
+      <div className="text-center max-w-3xl mx-auto">
+        <Reveal>
+          <Eyebrow className="justify-center"><span>Perguntas frequentes</span></Eyebrow>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className="text-display-l text-laudok-900 mt-4">
+            Tudo o que você precisa saber, num só lugar.
           </h2>
-          <p className="text-xl text-gray-600 mb-10">
-            Tire suas dúvidas sobre o Laudok! Filtre por categoria e encontre rapidamente o que precisa.
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="text-body-l text-ink-muted mt-4">
+            Filtre por categoria e encontre as respostas mais comuns sobre o Laudok!
           </p>
-          <Link
-            href="/faq"
-            className="inline-flex items-center gap-2 px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-laudok-dark hover:bg-laudok hover:scale-105 hover:shadow-xl transition-all duration-300"
-          >
-            Ver todas as perguntas frequentes
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+        </Reveal>
+        <Reveal delay={240}>
+          <div className="mt-10">
+            <LinkButton href="/faq" size="lg">
+              Ver todas as perguntas
+              <ArrowRight size={18} />
+            </LinkButton>
+          </div>
+        </Reveal>
       </div>
-    </section>
+    </SectionShell>
   );
 }

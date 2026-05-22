@@ -1,29 +1,32 @@
-"use client";
-
-import React from 'react';
-import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Eyebrow, LinkButton, Reveal, SectionShell } from '@/components/ui';
 
 export default function CTASection() {
   return (
-    <section className="bg-gradient-laudok text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Transforme sua produtividade hoje mesmo
+    <SectionShell tone="surface" withGrid>
+      <div className="text-center max-w-3xl mx-auto">
+        <Reveal>
+          <Eyebrow className="justify-center"><span>Comece agora</span></Eyebrow>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className="text-display-xl text-laudok-900 mt-4">
+            Transforme sua produtividade hoje mesmo.
           </h2>
-          <p className="text-xl text-laudok-light mb-8">
-            Experimente gratuitamente e descubra como o Laudok! pode revolucionar sua forma de trabalhar
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="text-body-l text-ink-muted mt-4">
+            Experimente gratuitamente e descubra como o Laudok! pode revolucionar sua forma de trabalhar.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/teste-gratis"
-              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white/10 hover:scale-105 hover:shadow-xl transition-all duration-300"
-            >
+        </Reveal>
+        <Reveal delay={240}>
+          <div className="mt-10">
+            <LinkButton href="/teste-gratis" size="lg">
               Experimente Grátis
-            </Link>
+              <ArrowRight size={18} />
+            </LinkButton>
           </div>
-        </div>
+        </Reveal>
       </div>
-    </section>
+    </SectionShell>
   );
 }
