@@ -36,8 +36,8 @@ export default function Home() {
       <FeaturesSection />
       <HowItWorksSection />
       <PlansSection />
-      <TestimonialsSection />
       <CTASection />
+      <TestimonialsSection />
       <Footer />
     </main>
   );

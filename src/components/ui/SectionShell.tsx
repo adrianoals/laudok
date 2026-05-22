@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 
-type Tone = 'cream' | 'surface' | 'dark';
+type Tone = 'cream' | 'surface' | 'pale' | 'dark';
 
 interface SectionShellProps extends HTMLAttributes<HTMLElement> {
   tone?: Tone;
@@ -11,6 +11,7 @@ interface SectionShellProps extends HTMLAttributes<HTMLElement> {
 const toneClasses: Record<Tone, string> = {
   cream:   'bg-surface-alt text-ink',
   surface: 'bg-surface text-ink',
+  pale:    'bg-laudok-100 text-ink',
   dark:    'bg-laudok-800 text-surface',
 };
 
