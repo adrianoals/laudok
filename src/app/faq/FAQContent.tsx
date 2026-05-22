@@ -85,7 +85,7 @@ const faqs: FAQItem[] = [
 ];
 
 export default function FAQContent() {
-  const [activeCategory, setActiveCategory] = useState<CategoryId | null>(null);
+  const [activeCategory, setActiveCategory] = useState<CategoryId>('produto');
   const [search, setSearch] = useState('');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -107,14 +107,15 @@ export default function FAQContent() {
       text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const term = normalize(search.trim());
     return faqs.filter((faq) => {
-      if (activeCategory && faq.category !== activeCategory) return false;
+      if (faq.category !== activeCategory) return false;
       if (!term) return true;
       return normalize(faq.question).includes(term) || normalize(faq.answer).includes(term);
     });
   }, [activeCategory, search]);
 
   const handleCategoryChange = (id: CategoryId) => {
-    setActiveCategory(activeCategory === id ? null : id);
+    if (id === activeCategory) return;
+    setActiveCategory(id);
     setOpenIndex(null);
   };
 
@@ -156,15 +157,6 @@ export default function FAQContent() {
             })}
           </div>
 
-          {activeCategory && (
-            <button
-              type="button"
-              onClick={() => setActiveCategory(null)}
-              className="mt-5 text-caption text-laudok-700 hover:text-laudok-500 transition-colors hidden lg:block"
-            >
-              ↺ Limpar filtro
-            </button>
-          )}
         </div>
       </aside>
 
@@ -195,20 +187,33 @@ export default function FAQContent() {
                   key={faq.question}
                   variant={isOpen ? 'emboss' : 'flat'}
                   withFillet={isOpen}
-                  className="overflow-hidden"
+                  className={
+                    isOpen
+                      ? 'overflow-hidden'
+                      : 'overflow-hidden bg-laudok-50/50 border-laudok-200 hover:bg-laudok-50 hover:border-laudok-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] transition-all duration-200 cursor-pointer'
+                  }
                 >
                   <button
+                    type="button"
                     className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     aria-expanded={isOpen}
                   >
                     <span className="text-body font-semibold text-laudok-900">{faq.question}</span>
-                    <ChevronDown
-                      size={20}
-                      className={`text-laudok-500 transition-transform flex-shrink-0 ${
-                        isOpen ? 'rotate-180' : ''
+                    <span
+                      className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                        isOpen
+                          ? 'bg-laudok-800 text-surface'
+                          : 'bg-laudok-100 text-laudok-700'
                       }`}
-                    />
+                      aria-hidden
+                    >
+                      <ChevronDown
+                        size={16}
+                        strokeWidth={2.5}
+                        className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                      />
+                    </span>
                   </button>
                   {isOpen && (
                     <div className="px-6 pb-6">

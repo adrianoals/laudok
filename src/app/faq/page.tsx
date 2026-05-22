@@ -73,10 +73,24 @@ export default function FAQPage() {
                       <span className="text-label text-laudok-200">Base de conhecimento</span>
                     </div>
                     <div>
-                      <div className="text-display-2xl text-surface leading-none">9</div>
-                      <div className="text-body text-laudok-100 mt-2">
-                        perguntas em <span className="text-surface font-semibold">4 categorias</span>
+                      <div className="text-display-m text-surface leading-tight">
+                        Perguntas organizadas por categoria.
                       </div>
+                      <div className="text-body-s text-laudok-100 mt-3">
+                        Filtre pelo tema desejado ou use a busca para encontrar respostas rápidas.
+                      </div>
+
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {['Produto', 'Norma técnica', 'Financeiro', 'Segurança'].map((label) => (
+                          <span
+                            key={label}
+                            className="inline-flex items-center px-2.5 py-1 rounded-full bg-surface/10 border border-surface/20 text-caption text-laudok-100"
+                          >
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+
                       <div className="mt-6 pt-5 border-t border-surface/15">
                         <div className="text-caption text-laudok-200">Atualizado periodicamente</div>
                         <div className="text-body-s text-surface mt-1">
