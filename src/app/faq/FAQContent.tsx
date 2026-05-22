@@ -142,10 +142,10 @@ export default function FAQContent() {
                     variant={active ? 'emboss' : 'flat'}
                     withFillet={active}
                     hoverable={!active}
-                    className="p-3 md:p-4 flex items-center gap-3 md:gap-4 whitespace-nowrap md:whitespace-normal min-w-[180px] md:min-w-0"
+                    className="px-3 py-2.5 md:p-4 flex items-center gap-2.5 md:gap-4 whitespace-nowrap md:whitespace-normal md:min-w-0"
                   >
                     <IconTile icon={cat.icon} tone={active ? 'filled' : 'soft'} size="sm" />
-                    <div className="flex-grow">
+                    <div className="flex-grow min-w-0">
                       <div className="text-body-s md:text-body font-semibold text-laudok-900">{cat.label}</div>
                       <div className="text-caption text-ink-muted mt-0.5 hidden md:block">
                         {count} {count === 1 ? 'pergunta' : 'perguntas'}
@@ -196,13 +196,15 @@ export default function FAQContent() {
                   >
                     <button
                       type="button"
-                      className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                      className="w-full px-4 py-4 md:px-6 md:py-5 text-left flex items-center justify-between gap-3 md:gap-4"
                       onClick={() => setOpenIndex(isOpen ? null : index)}
                       aria-expanded={isOpen}
                     >
-                      <span className="text-body font-semibold text-laudok-900">{faq.question}</span>
+                      <span className="flex-1 min-w-0 text-body-s md:text-body font-semibold text-laudok-900">
+                        {faq.question}
+                      </span>
                       <span
-                        className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                        className={`flex-shrink-0 w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center transition-colors ${
                           isOpen
                             ? 'bg-laudok-800 text-surface'
                             : 'bg-laudok-100 text-laudok-700'
@@ -217,8 +219,8 @@ export default function FAQContent() {
                       </span>
                     </button>
                     {isOpen && (
-                      <div className="px-6 pb-6">
-                        <p className="text-body text-ink-muted leading-relaxed">{faq.answer}</p>
+                      <div className="px-4 pb-5 md:px-6 md:pb-6">
+                        <p className="text-body-s md:text-body text-ink-muted leading-relaxed">{faq.answer}</p>
                       </div>
                     )}
                   </Card>
