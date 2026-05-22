@@ -150,7 +150,7 @@ Cada um reescrito com os primitivos acima:
 ## 5. Sistema de animação
 
 - **Entradas** (todos os `Reveal` wrappers): `opacity 0 → 1` + `translateY 24px → 0`, duração 700ms, easing `cubic-bezier(0.22, 1, 0.36, 1)`. Trigger via IntersectionObserver `threshold: 0.15`, `rootMargin: 0px 0px -50px 0px`. Stagger entre filhos: 80ms.
-- **Hover** em cards: `translateY -4px` + sombra `shadow-card` → `shadow-hover`, duração 250ms.
+- **Hover** em cards: `translateY -4px` + sombra `shadow-emboss` → `shadow-hover`, duração 250ms.
 - **Hover** em botões Primary: brightness +5% + scale 1.02, duração 150ms.
 - **Acessibilidade**: respeitar `prefers-reduced-motion` — desligar transforms, manter opacity.
 
