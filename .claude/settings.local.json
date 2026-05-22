@@ -3,7 +3,14 @@
     "allow": [
       "Bash(git:*)",
       "Bash(wc:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(gh auth *)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
 }
