@@ -31,9 +31,9 @@ const decorations = (
 export default function ProblemSolutionSection() {
   return (
     <SectionShell tone="pale" decorations={decorations}>
-      <div className="max-w-3xl mb-16">
+      <div className="max-w-3xl mb-16 text-center md:text-left mx-auto md:mx-0">
         <Reveal>
-          <Eyebrow>O problema · A solução</Eyebrow>
+          <Eyebrow className="justify-center md:justify-start">O problema · A solução</Eyebrow>
         </Reveal>
         <Reveal delay={80}>
           <h2 className="text-display-l text-laudok-900 mt-4">

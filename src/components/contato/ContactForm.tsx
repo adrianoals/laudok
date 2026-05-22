@@ -79,13 +79,15 @@ export default function ContactForm() {
 
   return (
     <Card variant="emboss" withFillet className="p-8 md:p-10">
-      <Eyebrow>Formulário</Eyebrow>
-      <h2 className="text-display-m text-laudok-900 mt-3 mb-2">
-        Envie sua mensagem.
-      </h2>
-      <p className="text-body text-ink-muted mb-8">
-        Preencha os campos abaixo e responderemos em até 24 horas em dias úteis.
-      </p>
+      <div className="text-center lg:text-left mb-8">
+        <Eyebrow className="justify-center lg:justify-start">Formulário</Eyebrow>
+        <h2 className="text-display-m text-laudok-900 mt-3 mb-2">
+          Envie sua mensagem.
+        </h2>
+        <p className="text-body text-ink-muted">
+          Preencha os campos abaixo e responderemos em até 24 horas em dias úteis.
+        </p>
+      </div>
 
       {formState.status === 'success' && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md flex items-start gap-3">

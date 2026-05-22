@@ -13,8 +13,8 @@ const features = [
 export default function FeaturesSection() {
   return (
     <SectionShell id="features" tone="surface">
-      <div className="max-w-3xl mb-16">
-        <Reveal><Eyebrow>Funcionalidades</Eyebrow></Reveal>
+      <div className="max-w-3xl mb-16 text-center md:text-left mx-auto md:mx-0">
+        <Reveal><Eyebrow className="justify-center md:justify-start">Funcionalidades</Eyebrow></Reveal>
         <Reveal delay={80}>
           <h2 className="text-display-l text-laudok-900 mt-4">
             Tudo que sua equipe técnica precisa.
@@ -29,8 +29,8 @@ export default function FeaturesSection() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {features.map((feature, idx) => (
           <Reveal key={feature.title} delay={idx * 60}>
-            <Card variant="emboss" withFillet hoverable className="p-6 h-full">
-              <IconTile icon={feature.icon} tone="filled" size="md" className="mb-5" />
+            <Card variant="emboss" withFillet hoverable className="p-6 h-full text-center md:text-left">
+              <IconTile icon={feature.icon} tone="filled" size="md" className="mb-5 mx-auto md:mx-0" />
               <h3 className="text-display-s text-laudok-900 mb-2">{feature.title}</h3>
               <p className="text-body-s text-ink-muted">{feature.desc}</p>
             </Card>

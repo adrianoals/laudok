@@ -18,9 +18,9 @@ export default function AboutSection() {
             </div>
           </Card>
         </Reveal>
-        <div className="space-y-6">
+        <div className="space-y-6 text-center md:text-left">
           <Reveal>
-            <Eyebrow>Sobre nós</Eyebrow>
+            <Eyebrow className="justify-center md:justify-start">Sobre nós</Eyebrow>
           </Reveal>
           <Reveal delay={80}>
             <h2 className="text-display-l text-laudok-900">

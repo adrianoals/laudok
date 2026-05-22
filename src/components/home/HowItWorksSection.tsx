@@ -11,8 +11,8 @@ const steps = [
 export default function HowItWorksSection() {
   return (
     <SectionShell id="how-it-works" tone="pale" withGrid>
-      <div className="max-w-3xl mb-16">
-        <Reveal><Eyebrow>Como funciona</Eyebrow></Reveal>
+      <div className="max-w-3xl mb-16 text-center md:text-left mx-auto md:mx-0">
+        <Reveal><Eyebrow className="justify-center md:justify-start">Como funciona</Eyebrow></Reveal>
         <Reveal delay={80}>
           <h2 className="text-display-l text-laudok-900 mt-4">
             Quatro passos, do projeto ao laudo entregue.
@@ -22,11 +22,11 @@ export default function HowItWorksSection() {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
         {steps.map((step, idx) => (
           <Reveal key={step.title} delay={idx * 80}>
-            <div className="relative">
+            <div className="relative text-center md:text-left">
               {idx < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-6 left-[calc(100%-12px)] w-6 border-t border-dashed border-laudok-300" aria-hidden />
               )}
-              <div className="flex items-start gap-4 mb-5">
+              <div className="flex items-start gap-4 mb-5 justify-center md:justify-start">
                 <NumberStep n={idx + 1} />
                 <IconTile icon={step.icon} tone="outlined" size="md" />
               </div>

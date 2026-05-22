@@ -9,9 +9,9 @@ export default function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
             <Reveal>
-              <Eyebrow tone="light">Laudok! · NBR 16.747/2020</Eyebrow>
+              <Eyebrow tone="light" className="justify-center lg:justify-start">Laudok! · NBR 16.747/2020</Eyebrow>
             </Reveal>
             <Reveal delay={80}>
               <h1 className="text-display-2xl">
@@ -20,13 +20,13 @@ export default function HeroSection() {
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="text-body-l text-laudok-100 max-w-xl">
+              <p className="text-body-l text-laudok-100 max-w-xl mx-auto lg:mx-0">
                 Plataforma especializada em laudos técnicos para condomínios. Conformidade com a NBR 16.747/2020,
                 produtividade para engenheiros e arquitetos.
               </p>
             </Reveal>
             <Reveal delay={240}>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <LinkButton href="/teste-gratis" size="lg" variant="inverse">
                   Experimente Grátis
                   <ArrowRight size={18} />

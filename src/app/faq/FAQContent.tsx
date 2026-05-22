@@ -122,8 +122,8 @@ export default function FAQContent() {
   return (
     <div className="grid md:grid-cols-12 gap-8 md:gap-10 lg:gap-12">
       <aside className="md:col-span-5 lg:col-span-4 min-w-0">
-        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 md:p-6 md:sticky md:top-24">
-          <Eyebrow>Filtrar por categoria</Eyebrow>
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 md:p-6 md:sticky md:top-24 text-center md:text-left">
+          <Eyebrow className="justify-center md:justify-start">Filtrar por categoria</Eyebrow>
           <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden md:block">Categorias</h2>
 
           <div className="grid grid-cols-2 gap-3 mt-4 md:flex md:flex-col md:gap-3 md:mt-0">

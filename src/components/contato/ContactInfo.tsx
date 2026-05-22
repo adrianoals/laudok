@@ -19,12 +19,12 @@ const socials: { icon: LucideIcon; label: string; href: string }[] = [
 export default function ContactInfo() {
   return (
     <div className="space-y-6">
-      <div className="mb-2">
-        <Eyebrow>Canais de contato</Eyebrow>
+      <div className="mb-2 text-center lg:text-left">
+        <Eyebrow className="justify-center lg:justify-start">Canais de contato</Eyebrow>
         <h2 className="text-display-m text-laudok-900 mt-3">
           Como falar com a gente.
         </h2>
-        <p className="text-body text-ink-muted mt-3 max-w-md">
+        <p className="text-body text-ink-muted mt-3 max-w-md mx-auto lg:mx-0">
           Escolha o melhor canal ou preencha o formulário ao lado. Respondemos em até 24 horas em dias úteis.
         </p>
       </div>
