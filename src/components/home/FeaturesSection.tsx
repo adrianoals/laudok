@@ -1,73 +1,42 @@
-"use client";
-
-import React from 'react';
 import { FileText, Clock, Shield, Users, Zap, BarChart } from 'lucide-react';
+import { Card, Eyebrow, IconTile, Reveal, SectionShell } from '@/components/ui';
 
 const features = [
-  {
-    icon: <FileText className="w-6 h-6" />,
-    title: 'Laudos Padronizados',
-    description: 'Gere laudos técnicos conforme a NBR 16.747/2020 de forma automática e padronizada.',
-  },
-  {
-    icon: <Clock className="w-6 h-6" />,
-    title: 'Economia de Tempo',
-    description: 'Reduza em até 80% o tempo gasto na elaboração de laudos com nossa automação inteligente.',
-  },
-  {
-    icon: <Shield className="w-6 h-6" />,
-    title: 'Conformidade Garantida',
-    description: 'Mantenha-se sempre atualizado com as normas técnicas mais recentes.',
-  },
-  {
-    icon: <Users className="w-6 h-6" />,
-    title: 'Colaboração em Equipe',
-    description: 'Trabalhe em equipe de forma eficiente com compartilhamento de projetos e documentos.',
-  },
-  {
-    icon: <Zap className="w-6 h-6" />,
-    title: 'Processo Otimizado',
-    description: 'Fluxo de trabalho inteligente que guia você em cada etapa do laudo.',
-  },
-  {
-    icon: <BarChart className="w-6 h-6" />,
-    title: 'Análises Detalhadas',
-    description: 'Relatórios completos com gráficos e estatísticas para melhor tomada de decisão.',
-  },
+  { icon: FileText, title: 'Laudos padronizados', desc: 'Geração automática conforme a NBR 16.747/2020.' },
+  { icon: Clock, title: 'Economia de tempo', desc: 'Reduza até 80% do tempo gasto na elaboração de laudos.' },
+  { icon: Shield, title: 'Conformidade garantida', desc: 'Sempre atualizado com as normas técnicas mais recentes.' },
+  { icon: Users, title: 'Colaboração em equipe', desc: 'Compartilhe projetos e documentos com fluidez.' },
+  { icon: Zap, title: 'Processo otimizado', desc: 'Fluxo de trabalho que guia você em cada etapa.' },
+  { icon: BarChart, title: 'Análises detalhadas', desc: 'Relatórios completos com gráficos e estatísticas.' },
 ];
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-laudok-dark mb-4">
-            Funcionalidades Principais
+    <SectionShell id="features" tone="surface">
+      <div className="max-w-3xl mb-16">
+        <Reveal><Eyebrow>Funcionalidades</Eyebrow></Reveal>
+        <Reveal delay={80}>
+          <h2 className="text-display-l text-laudok-900 mt-4">
+            Tudo que sua equipe técnica precisa.
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Tudo que você precisa para elaborar laudos técnicos de forma eficiente e profissional
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="text-body-l text-ink-muted mt-4">
+            Ferramentas pensadas para profissionais de engenharia e arquitetura que valorizam tempo e precisão.
           </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-gradient-laudok rounded-2xl p-8 shadow-laudok hover:shadow-laudok-dark transition-all duration-300 hover:scale-105 text-white"
-            >
-              <div className="p-3 bg-laudok-light rounded-lg w-fit mb-6">
-                <div className="text-laudok-dark">{feature.icon}</div>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-laudok-light">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        </Reveal>
       </div>
-    </section>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((feature, idx) => (
+          <Reveal key={feature.title} delay={idx * 60}>
+            <Card variant="emboss" withFillet hoverable className="p-6 h-full">
+              <IconTile icon={feature.icon} tone="filled" size="md" className="mb-5" />
+              <h3 className="text-display-s text-laudok-900 mb-2">{feature.title}</h3>
+              <p className="text-body-s text-ink-muted">{feature.desc}</p>
+            </Card>
+          </Reveal>
+        ))}
+      </div>
+    </SectionShell>
   );
 }

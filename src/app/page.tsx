@@ -8,7 +8,6 @@ import HowItWorksSection from '@/components/home/HowItWorksSection';
 import PlansSection from '@/components/home/PlansSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import CTASection from '@/components/home/CTASection';
-import FAQSection from '@/components/home/FAQSection';
 
 export const metadata = {
   title: 'Laudok! - Laudos de Engenharia Inteligentes',
@@ -37,9 +36,8 @@ export default function Home() {
       <FeaturesSection />
       <HowItWorksSection />
       <PlansSection />
-      <TestimonialsSection />
       <CTASection />
-      <FAQSection />
+      <TestimonialsSection />
       <Footer />
     </main>
   );

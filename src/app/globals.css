@@ -1,112 +1,183 @@
 @import "tailwindcss";
 
+/* =========================================================
+   Design tokens — Laudok! brand-bold-architectural
+   ========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --laudok: #0086C2;
-  --laudok-dark: #034575;
-  --laudok-light: #e6f4fa;
-  --laudok-hover: rgba(0, 134, 194, 0.70);
-  --laudok-dark-hover: rgba(3, 69, 117, 0.75);
+  /* Brand scale */
+  --laudok-50:  #f0f9ff;
+  --laudok-100: #e6f4fa;
+  --laudok-200: #c6e7f5;
+  --laudok-300: #9dd8ee;
+  --laudok-400: #5cb9dc;
+  --laudok-500: #0086c2;
+  --laudok-600: #0276af;
+  --laudok-700: #035e8e;
+  --laudok-800: #034575;
+  --laudok-900: #033458;
+
+  /* Warm neutrals */
+  --sand-50:  #fbf9f4;
+  --sand-100: #faf7f2;
+  --sand-200: #ede7d8;
+  --sand-300: #d4cdb8;
+
+  /* Text */
+  --ink:        #0f172a;
+  --ink-muted:  #475569;
+  --ink-faded:  #94a3b8;
+
+  /* Surfaces */
+  --surface:     #ffffff;
+  --surface-alt: #ffffff;
+
+  /* Shadows (tinta azul) */
+  --shadow-card:   0 1px 0 rgba(0,0,0,.04), 0 12px 30px -10px rgba(3,69,117,.18);
+  --shadow-emboss: 0 30px 60px -30px rgba(3,69,117,.25), 0 2px 4px rgba(3,69,117,.05);
+  --shadow-hover:  0 40px 80px -35px rgba(3,69,117,.35), 0 4px 8px rgba(3,69,117,.08);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.6, 0, 0.4, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Cores */
+  --color-laudok-50:  var(--laudok-50);
+  --color-laudok-100: var(--laudok-100);
+  --color-laudok-200: var(--laudok-200);
+  --color-laudok-300: var(--laudok-300);
+  --color-laudok-400: var(--laudok-400);
+  --color-laudok-500: var(--laudok-500);
+  --color-laudok-600: var(--laudok-600);
+  --color-laudok-700: var(--laudok-700);
+  --color-laudok-800: var(--laudok-800);
+  --color-laudok-900: var(--laudok-900);
+  --color-sand-50:  var(--sand-50);
+  --color-sand-100: var(--sand-100);
+  --color-sand-200: var(--sand-200);
+  --color-sand-300: var(--sand-300);
+  --color-ink:       var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faded: var(--ink-faded);
+  --color-surface:     var(--surface);
+  --color-surface-alt: var(--surface-alt);
+
+  /* Fontes */
+  --font-sans:    var(--font-inter), Inter, system-ui, sans-serif;
+  --font-display: var(--font-display), 'Bricolage Grotesque', sans-serif;
+
+  /* Sombras */
+  --shadow-card:   var(--shadow-card);
+  --shadow-emboss: var(--shadow-emboss);
+  --shadow-hover:  var(--shadow-hover);
+
+  /* Radii */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   Tipografia — escala display custom (Bricolage)
+   ========================================================= */
+
+.font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+
+.text-display-2xl { font-family: var(--font-display); font-size: clamp(2.75rem, 5vw + 1rem, 4.5rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 700; }
+.text-display-xl  { font-family: var(--font-display); font-size: clamp(2.25rem, 4vw + 1rem, 3.5rem); line-height: 1.08; letter-spacing: -0.02em; font-weight: 700; }
+.text-display-l   { font-family: var(--font-display); font-size: clamp(1.875rem, 2.5vw + 1rem, 2.75rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
+.text-display-m   { font-family: var(--font-display); font-size: 2rem; line-height: 1.15; letter-spacing: -0.015em; font-weight: 700; }
+.text-display-s   { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.01em; font-weight: 700; }
+
+.text-body-l   { font-size: 1.25rem; line-height: 1.5; }
+.text-body     { font-size: 1rem;    line-height: 1.5; }
+.text-body-s   { font-size: 0.875rem; line-height: 1.55; }
+.text-caption  { font-size: 0.75rem; line-height: 1.5; }
+.text-label    { font-size: 0.6875rem; line-height: 1.4; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+
+/* =========================================================
+   Decoração — grid blueprint, filete lateral, gradient laudok
+   ========================================================= */
+
+.bg-grid-blueprint {
+  background-image:
+    linear-gradient(rgba(3,69,117,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3,69,117,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
+
+.bg-grid-blueprint-light {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-grid-blueprint--masked {
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 90%);
+}
+
+.card-fillet {
+  position: relative;
+}
+.card-fillet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--laudok-500), var(--laudok-800));
+  border-radius: 0 3px 3px 0;
+}
+
+.bg-gradient-laudok {
+  background: linear-gradient(135deg, var(--laudok-500) 0%, var(--laudok-800) 100%);
+}
+
+/* =========================================================
+   Motion — Reveal helper (ativado via JS)
+   ========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-alt);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Cores de fundo */
-.bg-laudok {
-  background-color: var(--laudok) !important;
-}
-.bg-laudok-dark {
-  background-color: var(--laudok-dark) !important;
-}
-.bg-laudok-light {
-  background-color: var(--laudok-light) !important;
-}
-
-/* Cores de texto */
-.text-laudok {
-  color: var(--laudok) !important;
-}
-.text-laudok-dark {
-  color: var(--laudok-dark) !important;
-}
-.text-laudok-light {
-  color: var(--laudok-light) !important;
-}
-
-/* Hover states */
-.hover\:bg-laudok:hover {
-  background-color: var(--laudok-hover) !important;
-}
-.hover\:bg-laudok-dark:hover {
-  background-color: var(--laudok-dark-hover) !important;
-}
-.hover\:bg-laudok-light:hover {
-  background-color: var(--laudok-light) !important;
-}
-
-.hover\:text-laudok:hover {
-  color: var(--laudok) !important;
-}
-.hover\:text-laudok-dark:hover {
-  color: var(--laudok-dark) !important;
-}
-.hover\:text-laudok-light:hover {
-  color: var(--laudok-light) !important;
-}
-
-/* Bordas */
-.border-laudok {
-  border-color: var(--laudok) !important;
-}
-.border-laudok-dark {
-  border-color: var(--laudok-dark) !important;
-}
-.border-laudok-light {
-  border-color: var(--laudok-light) !important;
-}
-
-/* Anéis de foco */
-.ring-laudok {
-  --tw-ring-color: var(--laudok) !important;
-}
-.ring-laudok-dark {
-  --tw-ring-color: var(--laudok-dark) !important;
-}
-.ring-laudok-light {
-  --tw-ring-color: var(--laudok-light) !important;
-}
-
-/* Gradientes */
-.bg-gradient-laudok {
-  background-image: linear-gradient(to right, var(--laudok), var(--laudok-dark)) !important;
-}
-.bg-gradient-laudok-light {
-  background-image: linear-gradient(to right, var(--laudok-light), var(--laudok)) !important;
-}
-
-/* Sombras */
-.shadow-laudok {
-  box-shadow: 0 4px 6px -1px rgba(0, 134, 194, 0.1), 0 2px 4px -1px rgba(0, 134, 194, 0.06) !important;
-}
-.shadow-laudok-dark {
-  box-shadow: 0 4px 6px -1px rgba(3, 69, 117, 0.1), 0 2px 4px -1px rgba(3, 69, 117, 0.06) !important;
+::selection {
+  background: var(--laudok-200);
+  color: var(--laudok-900);
 }

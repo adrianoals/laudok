@@ -1,50 +1,34 @@
 'use client';
 
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { Card, IconTile, LinkButton, SectionShell } from '@/components/ui';
 
 export default function CheckoutSuccessPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-surface-alt">
       <Header />
-      <main className="flex-grow flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full text-center space-y-8">
-          <div className="flex justify-center">
-            <CheckCircle className="w-20 h-20 text-green-500" />
-          </div>
-
-          <div className="space-y-4">
-            <h1 className="text-3xl font-bold text-laudok-dark">
-              Pagamento Confirmado!
-            </h1>
-            <p className="text-lg text-gray-600">
-              Obrigado por assinar o Laudok! Seu cadastro está sendo processado e você receberá um email com as instruções de acesso em breve.
+      <main className="flex-grow pt-16">
+        <SectionShell tone="cream" withGrid>
+          <Card variant="emboss" withFillet className="max-w-xl mx-auto p-10 text-center">
+            <IconTile icon={CheckCircle2} tone="filled" size="lg" className="mx-auto mb-6" />
+            <h1 className="text-display-l text-laudok-900 mb-4">Pagamento confirmado!</h1>
+            <p className="text-body-l text-ink-muted mb-8">
+              Obrigado por assinar o Laudok! Seu cadastro está sendo processado e você receberá um e-mail com as instruções de acesso em breve.
             </p>
-          </div>
-
-          <div className="space-y-4 pt-4">
-            <Link
-              href="/"
-              className="block w-full bg-laudok-dark text-white py-3 px-4 rounded-md hover:bg-laudok transition-colors font-medium"
-            >
-              Voltar para Home
-            </Link>
-            <p className="text-sm text-gray-500">
-              Se você tiver dúvidas, entre em contato conosco em{' '}
-              <a href="mailto:contato@laudok.com.br" className="text-laudok hover:underline">
+            <LinkButton href="/" size="lg">Voltar para a Home</LinkButton>
+            <p className="text-body-s text-ink-muted mt-6">
+              Se você tiver dúvidas, entre em contato em{' '}
+              <Link href="mailto:contato@laudok.com.br" className="text-laudok-700 hover:text-laudok-500 transition-colors">
                 contato@laudok.com.br
-              </a>
+              </Link>
             </p>
-          </div>
-        </div>
+          </Card>
+        </SectionShell>
       </main>
       <Footer />
     </div>
   );
 }
-
-
-
-

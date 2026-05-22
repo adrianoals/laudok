@@ -1,22 +1,30 @@
 "use client";
 
 import { useMemo, useState } from 'react';
-import { ChevronDown, Search } from 'lucide-react';
+import {
+  ChevronDown,
+  Search,
+  Package,
+  ShieldCheck,
+  CreditCard,
+  Lock,
+  type LucideIcon,
+} from 'lucide-react';
+import { Card, Eyebrow, IconTile } from '@/components/ui';
 
-type CategoryId = 'todos' | 'produto' | 'norma' | 'financeiro' | 'seguranca';
+type CategoryId = 'produto' | 'norma' | 'financeiro' | 'seguranca';
 
 interface FAQItem {
-  category: Exclude<CategoryId, 'todos'>;
+  category: CategoryId;
   question: string;
   answer: string;
 }
 
-const categories: { id: CategoryId; label: string }[] = [
-  { id: 'todos', label: 'Todas' },
-  { id: 'produto', label: 'Sobre o Produto' },
-  { id: 'norma', label: 'Atendimento à Norma' },
-  { id: 'financeiro', label: 'Financeiro e Pagamento' },
-  { id: 'seguranca', label: 'Segurança e Privacidade' },
+const categories: { id: CategoryId; label: string; icon: LucideIcon }[] = [
+  { id: 'produto', label: 'Sobre o Produto', icon: Package },
+  { id: 'norma', label: 'Atendimento à Norma', icon: ShieldCheck },
+  { id: 'financeiro', label: 'Financeiro e Pagamento', icon: CreditCard },
+  { id: 'seguranca', label: 'Segurança e Privacidade', icon: Lock },
 ];
 
 const faqs: FAQItem[] = [
@@ -77,102 +85,148 @@ const faqs: FAQItem[] = [
 ];
 
 export default function FAQContent() {
-  const [activeCategory, setActiveCategory] = useState<CategoryId>('todos');
+  const [activeCategory, setActiveCategory] = useState<CategoryId>('produto');
   const [search, setSearch] = useState('');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const countByCategory = useMemo(() => {
+    const counts: Record<CategoryId, number> = {
+      produto: 0,
+      norma: 0,
+      financeiro: 0,
+      seguranca: 0,
+    };
+    faqs.forEach((f) => {
+      counts[f.category]++;
+    });
+    return counts;
+  }, []);
 
   const filtered = useMemo(() => {
     const normalize = (text: string) =>
       text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const term = normalize(search.trim());
-
     return faqs.filter((faq) => {
-      const matchCategory = activeCategory === 'todos' || faq.category === activeCategory;
-      if (!matchCategory) return false;
+      if (faq.category !== activeCategory) return false;
       if (!term) return true;
-      return (
-        normalize(faq.question).includes(term) || normalize(faq.answer).includes(term)
-      );
+      return normalize(faq.question).includes(term) || normalize(faq.answer).includes(term);
     });
   }, [activeCategory, search]);
 
   const handleCategoryChange = (id: CategoryId) => {
+    if (id === activeCategory) return;
     setActiveCategory(id);
     setOpenIndex(null);
   };
 
   return (
-    <div className="space-y-10">
-      <div className="max-w-2xl mx-auto">
-        <label htmlFor="faq-search" className="sr-only">
-          Buscar pergunta
-        </label>
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input
-            id="faq-search"
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar por palavra-chave..."
-            className="w-full rounded-full border border-gray-200 bg-white py-3 pl-12 pr-4 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-laudok focus:border-transparent"
-          />
-        </div>
-      </div>
+    <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
+      <aside className="lg:col-span-4">
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 lg:p-6 lg:sticky lg:top-24">
+          <Eyebrow>Filtrar por categoria</Eyebrow>
+          <h2 className="text-display-s text-laudok-900 mt-3 mb-5 hidden lg:block">Categorias</h2>
 
-      <div className="flex flex-wrap justify-center gap-2">
-        {categories.map((category) => {
-          const isActive = activeCategory === category.id;
-          return (
-            <button
-              key={category.id}
-              type="button"
-              onClick={() => handleCategoryChange(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
-                isActive
-                  ? 'bg-laudok-dark text-white border-laudok-dark'
-                  : 'bg-white text-laudok-dark border-gray-200 hover:bg-laudok-light hover:border-laudok'
-              }`}
-            >
-              {category.label}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="max-w-3xl mx-auto space-y-4">
-        {filtered.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-dashed border-gray-300 p-10 text-center text-gray-500">
-            Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
+          <div className="flex lg:flex-col gap-3 mt-4 lg:mt-0 overflow-x-auto lg:overflow-visible pb-1 -mx-5 px-5 lg:mx-0 lg:px-0 snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {categories.map((cat) => {
+              const active = activeCategory === cat.id;
+              const count = countByCategory[cat.id];
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => handleCategoryChange(cat.id)}
+                  aria-pressed={active}
+                  className="flex-shrink-0 lg:flex-shrink lg:w-full text-left snap-start"
+                >
+                  <Card
+                    variant={active ? 'emboss' : 'flat'}
+                    withFillet={active}
+                    hoverable={!active}
+                    className="p-3 lg:p-4 flex items-center gap-3 lg:gap-4 whitespace-nowrap lg:whitespace-normal min-w-[180px] lg:min-w-0"
+                  >
+                    <IconTile icon={cat.icon} tone={active ? 'filled' : 'soft'} size="sm" />
+                    <div className="flex-grow">
+                      <div className="text-body-s lg:text-body font-semibold text-laudok-900">{cat.label}</div>
+                      <div className="text-caption text-ink-muted mt-0.5 hidden lg:block">
+                        {count} {count === 1 ? 'pergunta' : 'perguntas'}
+                      </div>
+                    </div>
+                  </Card>
+                </button>
+              );
+            })}
           </div>
-        ) : (
-          filtered.map((faq, index) => (
-            <div
-              key={faq.question}
-              className="bg-white rounded-2xl shadow-laudok overflow-hidden border border-laudok-dark/30 transition-all duration-300"
-            >
-              <button
-                className="w-full px-6 py-4 text-left flex items-center justify-between gap-4"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                aria-expanded={openIndex === index}
-              >
-                <span className="text-lg font-medium text-laudok-dark">
-                  {faq.question}
-                </span>
-                <ChevronDown
-                  className={`flex-shrink-0 w-5 h-5 text-laudok transition-transform ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {openIndex === index && (
-                <div className="px-6 pb-5">
-                  <p className="text-laudok-dark/90 leading-relaxed">{faq.answer}</p>
-                </div>
-              )}
-            </div>
-          ))
-        )}
+
+        </div>
+      </aside>
+
+      <div className="lg:col-span-8">
+        <div className="bg-laudok-50 border border-laudok-100 rounded-2xl p-5 lg:p-6">
+          <div className="relative mb-5">
+            <label htmlFor="faq-search" className="sr-only">Buscar pergunta</label>
+            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faded" />
+            <input
+              id="faq-search"
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar por palavra-chave..."
+              className="w-full rounded-full border border-laudok-200/70 bg-surface py-3.5 pl-12 pr-4 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-4 focus:ring-laudok-500/15 focus:border-laudok-500 transition-all"
+            />
+          </div>
+
+          <div className="space-y-3">
+            {filtered.length === 0 ? (
+              <Card variant="flat" className="p-10 text-center text-ink-muted">
+                Nenhuma pergunta encontrada nesta categoria com esse termo de busca.
+              </Card>
+            ) : (
+              filtered.map((faq, index) => {
+                const isOpen = openIndex === index;
+                return (
+                  <Card
+                    key={faq.question}
+                    variant={isOpen ? 'emboss' : 'flat'}
+                    withFillet={isOpen}
+                    className={
+                      isOpen
+                        ? 'overflow-hidden'
+                        : 'overflow-hidden shadow-[0_1px_3px_rgba(3,69,117,0.05)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] transition-all duration-200 cursor-pointer'
+                    }
+                  >
+                    <button
+                      type="button"
+                      className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                      onClick={() => setOpenIndex(isOpen ? null : index)}
+                      aria-expanded={isOpen}
+                    >
+                      <span className="text-body font-semibold text-laudok-900">{faq.question}</span>
+                      <span
+                        className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                          isOpen
+                            ? 'bg-laudok-800 text-surface'
+                            : 'bg-laudok-100 text-laudok-700'
+                        }`}
+                        aria-hidden
+                      >
+                        <ChevronDown
+                          size={16}
+                          strokeWidth={2.5}
+                          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                        />
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-6 pb-6">
+                        <p className="text-body text-ink-muted leading-relaxed">{faq.answer}</p>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

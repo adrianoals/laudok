@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import { Loader2, Mail, Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from '@/components/ui';
 
 interface FormData {
   email: string;
@@ -14,17 +15,13 @@ interface FormState {
   message: string;
 }
 
-export default function LoginForm() {
-  const [formData, setFormData] = useState<FormData>({
-    email: '',
-    password: '',
-  });
+const inputClasses =
+  'w-full rounded-md bg-laudok-50/60 border border-laudok-200/70 text-ink placeholder:text-ink-faded focus:outline-none focus:ring-4 focus:ring-laudok-500/15 focus:border-laudok-500 focus:bg-surface hover:border-laudok-300 transition-all duration-200 py-3';
 
+export default function LoginForm() {
+  const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
-  const [formState, setFormState] = useState<FormState>({
-    status: 'idle',
-    message: '',
-  });
+  const [formState, setFormState] = useState<FormState>({ status: 'idle', message: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,19 +35,11 @@ export default function LoginForm() {
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Erro ao fazer login');
-      }
-
-      // Redirecionar após login bem-sucedido
+      if (!response.ok) throw new Error(data.error || 'Erro ao fazer login');
       if (data.redirectTo) {
         window.location.href = data.redirectTo;
       } else {
@@ -60,43 +49,33 @@ export default function LoginForm() {
       setFormState({
         status: 'error',
         message:
-          error instanceof Error
-            ? error.message
-            : 'Erro ao fazer login. Verifique suas credenciais.',
+          error instanceof Error ? error.message : 'Erro ao fazer login. Verifique suas credenciais.',
       });
     }
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-laudok p-8 w-full max-w-md">
+    <div className="bg-surface rounded-2xl shadow-[var(--shadow-emboss)] p-8 w-full max-w-md">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-laudok-dark mb-2">
-          Entrar na Conta
-        </h2>
-        <p className="text-gray-600">
-          Acesse sua conta para continuar
-        </p>
+        <div className="text-label text-laudok-700 mb-3">Acesse sua conta</div>
+        <h2 className="text-display-m text-laudok-900 mb-2">Entrar no Laudok!</h2>
+        <p className="text-body text-ink-muted">Acesse sua conta para continuar</p>
       </div>
 
       {formState.status === 'error' && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-          <p className="text-red-700 text-sm">{formState.message}</p>
+          <p className="text-red-700 text-body-s">{formState.message}</p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="email" className="block text-body-s font-medium text-ink mb-2">
             E-mail
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Mail className="h-5 w-5 text-gray-400" />
-            </div>
+            <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-laudok-500" />
             <input
               type="email"
               id="email"
@@ -104,23 +83,18 @@ export default function LoginForm() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors"
+              className={`${inputClasses} pl-11`}
               placeholder="seu@email.com"
             />
           </div>
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="password" className="block text-body-s font-medium text-ink mb-2">
             Senha
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Lock className="h-5 w-5 text-gray-400" />
-            </div>
+            <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-laudok-500" />
             <input
               type={showPassword ? 'text' : 'password'}
               id="password"
@@ -128,52 +102,36 @@ export default function LoginForm() {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-laudok focus:border-laudok transition-colors"
+              className={`${inputClasses} pl-11 pr-12`}
               placeholder="Sua senha"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-ink-faded hover:text-ink-muted"
               aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
             >
-              {showPassword ? (
-                <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-              ) : (
-                <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-              )}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <label className="flex items-center gap-2 text-body-s text-ink-muted">
             <input
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              className="h-4 w-4 text-laudok focus:ring-laudok border-gray-300 rounded"
+              className="h-4 w-4 rounded border-sand-300 text-laudok-500 focus:ring-laudok-300"
             />
-            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-              Lembrar-me
-            </label>
-          </div>
-
-          <div className="text-sm">
-            <Link
-              href="/recuperar-senha"
-              className="font-medium text-laudok hover:text-laudok-dark"
-            >
-              Esqueceu a senha?
-            </Link>
-          </div>
+            Lembrar-me
+          </label>
+          <Link href="/recuperar-senha" className="text-body-s font-medium text-laudok-700 hover:text-laudok-500 transition-colors">
+            Esqueceu a senha?
+          </Link>
         </div>
 
-        <button
-          type="submit"
-          disabled={formState.status === 'loading'}
-          className="w-full bg-laudok-dark text-white py-3 px-6 rounded-md font-medium hover:bg-laudok transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-        >
+        <Button type="submit" size="lg" disabled={formState.status === 'loading'} className="w-full">
           {formState.status === 'loading' ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -182,16 +140,13 @@ export default function LoginForm() {
           ) : (
             'Entrar'
           )}
-        </button>
+        </Button>
       </form>
 
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-body-s text-ink-muted">
           Não tem uma conta?{' '}
-          <Link
-            href="/cadastro"
-            className="font-medium text-laudok hover:text-laudok-dark"
-          >
+          <Link href="/cadastro" className="font-medium text-laudok-700 hover:text-laudok-500 transition-colors">
             Cadastre-se
           </Link>
         </p>
@@ -199,4 +154,3 @@ export default function LoginForm() {
     </div>
   );
 }
-

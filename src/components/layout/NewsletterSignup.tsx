@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import Link from 'next/link';
 import { Loader2, Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -24,96 +24,65 @@ export default function NewsletterSignup() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Não foi possível concluir sua inscrição.');
-      }
-
+      if (!response.ok) throw new Error(data.error || 'Não foi possível concluir sua inscrição.');
       setStatus('success');
-      setFeedback('Inscrição confirmada! Em breve você receberá novidades da Laudok!');
+      setFeedback('Inscrição confirmada!');
       setEmail('');
     } catch (error) {
       setStatus('error');
       setFeedback(
-        error instanceof Error
-          ? error.message
-          : 'Não foi possível concluir sua inscrição. Tente novamente.'
+        error instanceof Error ? error.message : 'Não foi possível concluir sua inscrição.',
       );
     }
   };
 
   return (
-    <section className="bg-laudok-dark/40 border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-              Assine a newsletter Laudok!
-            </h2>
-            <p className="text-laudok-light">
-              Receba conteúdos exclusivos sobre laudos de engenharia, atualizações da NBR
-              16.747 e novidades da plataforma direto no seu e-mail.
+    <section className="relative border-b border-laudok-800/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
+        >
+          <div className="md:flex-shrink-0">
+            <div className="text-label text-laudok-200">Newsletter Laudok!</div>
+            <p className="text-body-s text-laudok-100/80 mt-1">
+              Conteúdos sobre laudos e novidades direto no seu e-mail.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="w-full">
+          <div className="md:flex-grow md:max-w-md md:ml-auto flex flex-col gap-2 w-full">
             <div className="flex flex-col sm:flex-row gap-3">
-              <label htmlFor="newsletter-email" className="sr-only">
-                Seu melhor e-mail
-              </label>
+              <label htmlFor="newsletter-email" className="sr-only">Seu melhor e-mail</label>
               <div className="relative flex-grow">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-laudok-dark" />
+                <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-faded" />
                 <input
                   id="newsletter-email"
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Seu melhor e-mail"
+                  placeholder="seu@email.com"
                   disabled={status === 'loading' || status === 'success'}
-                  className="w-full rounded-md bg-white text-laudok-dark placeholder:text-gray-400 py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-laudok-light disabled:opacity-60"
+                  className="w-full rounded-md bg-surface text-ink placeholder:text-ink-faded text-body-s py-2.5 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-laudok-300 disabled:opacity-60"
                 />
               </div>
-              <button
-                type="submit"
-                disabled={status === 'loading' || status === 'success'}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md font-semibold bg-white text-laudok-dark hover:bg-laudok-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {status === 'loading' ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Enviando...
-                  </>
-                ) : (
-                  'Inscrever-se'
-                )}
-              </button>
+              <Button type="submit" size="sm" variant="inverse" disabled={status === 'loading' || status === 'success'}>
+                {status === 'loading' ? <Loader2 size={16} className="animate-spin" /> : 'Inscrever-se'}
+              </Button>
             </div>
-
             {status === 'success' && (
-              <div className="mt-4 flex items-start gap-2 text-sm text-white">
-                <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>{feedback}</span>
-              </div>
+              <p className="flex items-center gap-2 text-caption text-laudok-100">
+                <CheckCircle size={12} /> {feedback}
+              </p>
             )}
             {status === 'error' && (
-              <div className="mt-4 flex items-start gap-2 text-sm text-white">
-                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>{feedback}</span>
-              </div>
+              <p className="flex items-center gap-2 text-caption text-laudok-100">
+                <AlertCircle size={12} /> {feedback}
+              </p>
             )}
-
-            <p className="mt-4 text-xs text-laudok-light/80">
-              Ao se inscrever, você concorda com a nossa{' '}
-              <Link href="/politica-de-privacidade" className="underline hover:text-white">
-                Política de Privacidade
-              </Link>
-              . Você pode cancelar a inscrição quando quiser.
-            </p>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </section>
   );

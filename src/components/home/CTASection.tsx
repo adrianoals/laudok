@@ -1,27 +1,35 @@
-"use client";
-
-import React from 'react';
-import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Eyebrow, LinkButton, Reveal } from '@/components/ui';
 
 export default function CTASection() {
   return (
-    <section className="bg-gradient-laudok text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <section className="relative overflow-hidden bg-laudok-900 text-surface">
+      <div className="absolute inset-0 bg-gradient-laudok opacity-90" aria-hidden />
+      <div className="absolute inset-0 bg-grid-blueprint bg-grid-blueprint--masked opacity-40 pointer-events-none" aria-hidden />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Transforme sua produtividade hoje mesmo
-          </h2>
-          <p className="text-xl text-laudok-light mb-8">
-            Experimente gratuitamente e descubra como o Laudok! pode revolucionar sua forma de trabalhar
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/teste-gratis"
-              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white/10 hover:scale-105 hover:shadow-xl transition-all duration-300"
-            >
-              Experimente Grátis
-            </Link>
-          </div>
+          <Reveal>
+            <Eyebrow tone="light" className="justify-center"><span>Comece agora</span></Eyebrow>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="text-display-xl mt-4">
+              Transforme sua produtividade hoje mesmo.
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="text-body-l text-laudok-100 mt-4">
+              Experimente gratuitamente e descubra como o Laudok! pode revolucionar sua forma de trabalhar.
+            </p>
+          </Reveal>
+          <Reveal delay={240}>
+            <div className="mt-10">
+              <LinkButton href="/teste-gratis" size="lg" variant="inverse">
+                Experimente Grátis
+                <ArrowRight size={18} />
+              </LinkButton>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

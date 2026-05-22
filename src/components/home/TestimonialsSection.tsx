@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import { Card, Eyebrow, Reveal, SectionShell } from '@/components/ui';
 
 const testimonials = [
   {
@@ -49,108 +50,68 @@ const testimonials = [
 ];
 
 export default function TestimonialsSection() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    loop: true,
-    slidesToScroll: 1,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', loop: true, slidesToScroll: 1 });
 
   const autoplay = useCallback(() => {
     if (!emblaApi) return;
-    
-    const autoplayInterval = setInterval(() => {
-      emblaApi.scrollNext();
-    }, 5000); // 5 segundos
-
-    return () => clearInterval(autoplayInterval);
+    const id = setInterval(() => emblaApi.scrollNext(), 5000);
+    return () => clearInterval(id);
   }, [emblaApi]);
 
-  useEffect(() => {
-    const cleanup = autoplay();
-    return cleanup;
-  }, [autoplay]);
+  useEffect(() => autoplay(), [autoplay]);
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <section id="testimonials" className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-laudok-dark mb-4">
-            O que nossos clientes dizem
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Profissionais que já transformaram sua produtividade com o Laudok!
+    <SectionShell id="testimonials" tone="pale">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <Reveal>
+          <Eyebrow className="justify-center"><span>Depoimentos</span></Eyebrow>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className="text-display-l text-laudok-900 mt-4">O que dizem nossos clientes.</h2>
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="text-body-l text-ink-muted mt-4">
+            Profissionais que já transformaram a produtividade com o Laudok!
           </p>
-        </div>
-
-        <div className="relative">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex transition-transform duration-400 ease-in-out">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] min-w-0 px-4"
-                >
-                  <div className="bg-gradient-laudok rounded-2xl p-8 shadow-laudok hover:shadow-laudok-dark transition-all duration-300 h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                        <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">
-                          {testimonial.name}
-                        </h3>
-                        <p className="text-laudok-light">
-                          {testimonial.role} - {testimonial.company}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 fill-yellow-500 text-white"
-                        />
-                      ))}
-                    </div>
-                    <p className="text-laudok-light italic">
-                      &quot;{testimonial.content}&quot;
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button
-            onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg z-10 -ml-4"
-            aria-label="Depoimento anterior"
-          >
-            <ChevronLeft className="w-6 h-6 text-laudok-dark" />
-          </button>
-
-          <button
-            onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg z-10 -mr-4"
-            aria-label="Próximo depoimento"
-          >
-            <ChevronRight className="w-6 h-6 text-laudok-dark" />
-          </button>
-        </div>
+        </Reveal>
       </div>
-    </section>
+
+      <div className="relative">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {testimonials.map((t) => (
+              <div key={t.name} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] min-w-0 px-3">
+                <Card variant="emboss" withFillet className="p-7 h-full">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} size={16} className="text-laudok-500 fill-laudok-500" />
+                    ))}
+                  </div>
+                  <p className="text-body text-ink italic mb-6">&ldquo;{t.content}&rdquo;</p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-sand-200">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                      <Image src={t.image} alt={t.name} fill className="object-cover" />
+                    </div>
+                    <div>
+                      <div className="text-body font-semibold text-laudok-900">{t.name}</div>
+                      <div className="text-body-s text-ink-muted">{t.role} · {t.company}</div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+        <button onClick={scrollPrev} className="absolute left-0 top-1/2 -translate-y-1/2 bg-surface p-2 rounded-full shadow-[var(--shadow-card)] -ml-3" aria-label="Depoimento anterior">
+          <ChevronLeft size={20} className="text-laudok-800" />
+        </button>
+        <button onClick={scrollNext} className="absolute right-0 top-1/2 -translate-y-1/2 bg-surface p-2 rounded-full shadow-[var(--shadow-card)] -mr-3" aria-label="Próximo depoimento">
+          <ChevronRight size={20} className="text-laudok-800" />
+        </button>
+      </div>
+    </SectionShell>
   );
 }

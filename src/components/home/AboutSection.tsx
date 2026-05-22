@@ -1,41 +1,47 @@
-"use client";
-
-import React from 'react';
 import Image from 'next/image';
+import { Card, Eyebrow, Reveal, SectionShell } from '@/components/ui';
 
-const AboutSection = () => {
+export default function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[400px]">
-            <Image
-              src="/images/about-image.jpg"
-              alt="Equipe Laudok!"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold mb-6 text-laudok-dark">
-              Sobre a Laudok! Inovação para a Engenharia Diagnóstica
+    <SectionShell id="about" tone="surface">
+      <div className="grid md:grid-cols-2 gap-12 items-center">
+        <Reveal>
+          <Card variant="emboss" className="overflow-hidden">
+            <div className="relative aspect-[4/5]">
+              <Image
+                src="/images/about-image.jpg"
+                alt="Equipe Laudok!"
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+            </div>
+          </Card>
+        </Reveal>
+        <div className="space-y-6">
+          <Reveal>
+            <Eyebrow>Sobre nós</Eyebrow>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="text-display-l text-laudok-900">
+              Sobre a Laudok! Inovação para a engenharia diagnóstica.
             </h2>
-            <p className="text-lg text-gray-600 mb-6">
-              A Laudok! nasce da expertise em engenharia diagnóstica com o propósito de inovar a rotina de peritos e
-              profissionais da construção civil. Desenvolvemos o Laudok! com a visão de simplificar processos
-              complexos, garantindo a conformidade técnica e elevando a produtividade na elaboração de laudos de
-              inspeção predial.
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="text-body-l text-ink-muted">
+              A Laudok! nasce da expertise em engenharia diagnóstica com o propósito de inovar a rotina de peritos
+              e profissionais da construção civil. Desenvolvemos o Laudok! para simplificar processos complexos,
+              garantindo conformidade técnica e elevando a produtividade na elaboração de laudos de inspeção predial.
             </p>
-            <p className="text-lg text-gray-600">
-              Nosso compromisso é com a excelência técnica e a conformidade total com a ABNT NBR 16.747/2020, 
-              oferecendo uma solução que transforma a maneira como os profissionais da área realizam suas vistorias 
-              e elaboram seus laudos.
+          </Reveal>
+          <Reveal delay={240}>
+            <p className="text-body text-ink-muted">
+              Nosso compromisso é com a excelência técnica e a conformidade total com a ABNT NBR 16.747/2020,
+              transformando a maneira como profissionais realizam vistorias e elaboram laudos.
             </p>
-          </div>
+          </Reveal>
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
-};
-
-export default AboutSection;
+}
