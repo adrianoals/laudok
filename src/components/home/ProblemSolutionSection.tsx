@@ -12,7 +12,7 @@ const solutions = [
   'Automação inteligente da geração de laudos',
   'Conformidade automática com a NBR 16.747/2020',
   'Gestão centralizada de projetos e equipes',
-  'Suporte especializado e materiais de treinamento',
+  'Suporte especializado e base de conhecimento',
 ];
 
 const decorations = (

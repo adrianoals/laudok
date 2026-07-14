@@ -4,7 +4,7 @@ import { Eyebrow, IconTile, NumberStep, Reveal, SectionShell } from '@/component
 const steps = [
   { icon: ClipboardList, title: 'Cadastro do projeto', desc: 'Informe dados básicos do condomínio e inicie seu projeto.' },
   { icon: Camera, title: 'Vistoria técnica', desc: 'Realize a vistoria e registre as anomalias encontradas.' },
-  { icon: FileText, title: 'Geração do laudo', desc: 'O sistema gera automaticamente conforme a NBR 16.747.' },
+  { icon: FileText, title: 'Geração do laudo', desc: 'O sistema facilita a classificação de anomalias e o suporte às soluções técnicas.' },
   { icon: CheckCircle, title: 'Revisão e entrega', desc: 'Revise o documento e entregue ao cliente com rapidez.' },
 ];
 

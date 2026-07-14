@@ -27,7 +27,7 @@ export default function HeroSection() {
             </Reveal>
             <Reveal delay={240}>
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <LinkButton href="/teste-gratis" size="lg" variant="inverse">
+                <LinkButton href="https://laudok.com.br/Account/Register" size="lg" variant="inverse">
                   Experimente Grátis
                   <ArrowRight size={18} />
                 </LinkButton>

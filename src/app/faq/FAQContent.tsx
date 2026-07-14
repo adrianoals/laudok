@@ -62,25 +62,25 @@ const faqs: FAQItem[] = [
     category: 'norma',
     question: 'A Laudok! se responsabiliza pela qualidade dos laudos gerados através da plataforma?',
     answer:
-      'A Laudok! oferece uma plataforma que apoia o engenheiro/arquiteto na elaboração dos laudos em conformidade com a NBR 16.747/2020. A responsabilidade técnica pelo conteúdo, conclusões e recomendações do laudo é do profissional habilitado que o elabora e assina. A plataforma é uma ferramenta de produtividade — a decisão técnica permanece com o profissional responsável.',
+      'A Laudok! oferece uma plataforma que auxilia o engenheiro ou arquiteto na elaboração dos laudos em conformidade com a NBR 16.747/2020. A responsabilidade técnica pelo conteúdo, pelas conclusões e pelas recomendações do laudo é do profissional habilitado que o elabora e assina. A plataforma é uma ferramenta de apoio e produtividade; a decisão técnica permanece com o profissional responsável.',
   },
   {
     category: 'norma',
     question: 'O banco de dados contém todas as anomalias possíveis?',
     answer:
-      'O banco de dados do Laudok! reúne as anomalias mais frequentes em edificações conforme a NBR 16.747/2020 e a experiência da nossa equipe técnica. O catálogo é atualizado periodicamente. Caso identifique uma anomalia que não esteja contemplada, você pode incluí-la manualmente no seu laudo ou enviar uma sugestão para contato@laudok.com.br para inclusão futura no catálogo.',
+      'O banco de dados do Laudok! reúne as anomalias mais frequentes em edificações, considerando a NBR 16.747/2020 e a experiência da equipe técnica. A base de conhecimento é atualizada periodicamente. Caso uma anomalia não esteja disponível, o profissional poderá incluí-la manualmente no laudo ou enviar uma sugestão para contato@laudok.com.br.',
   },
   {
     category: 'financeiro',
     question: 'Como faço para atualizar meus dados cadastrais e formas de pagamento?',
     answer:
-      'Acesse a sua conta na plataforma, vá em "Minha Conta" para atualizar dados cadastrais e em "Assinatura" para alterar a forma de pagamento. Se tiver qualquer dificuldade, fale com nosso time em contato@laudok.com.br.',
+      'Acesse sua conta na plataforma Laudok! para consultar e atualizar seus dados cadastrais e suas formas de pagamento. Caso precise de ajuda, entre em contato pelo e-mail contato@laudok.com.br.',
   },
   {
     category: 'seguranca',
     question: 'Posso compartilhar minha licença e usuário?',
     answer:
-      'Não. A licença e o usuário do Laudok! são pessoais e intransferíveis. O compartilhamento viola os Termos de Uso da plataforma e compromete a segurança dos seus dados e dos laudos gerados. Cada profissional deve utilizar a sua própria conta.',
+      'Não. A licença e o usuário do Laudok! são pessoais e intransferíveis. O compartilhamento viola os Termos de Uso da plataforma e compromete a segurança dos seus dados e dos laudos gerados. Cada profissional deve utilizar sua própria conta.',
   },
 ];
 

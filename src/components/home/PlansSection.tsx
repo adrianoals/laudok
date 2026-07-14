@@ -24,7 +24,7 @@ const plans: Plan[] = [
     description: 'Elaboração de apenas 1 laudo',
     monthlyPrice: 'R$ 0',
     perLaudoPrice: 'R$ 890',
-    features: ['Sem assinatura mensal', '1 laudo gerado', 'Conformidade com NBR 16.747/2020', 'Suporte por e-mail'],
+    features: ['Laudos sob demanda', 'Conformidade com a NBR 16.747/2020', 'Relatório fotográfico automatizado', 'Classificação de anomalias e suporte às soluções técnicas'],
     cta: 'Começar agora',
     highlighted: false,
   },
@@ -34,7 +34,7 @@ const plans: Plan[] = [
     description: 'Para uso recorrente em projetos contínuos',
     monthlyPrice: 'R$ 170',
     perLaudoPrice: 'R$ 270',
-    features: ['Assinatura semestral', 'Laudos sob demanda', 'Conformidade com NBR 16.747/2020', 'Suporte prioritário', 'Renovação automática'],
+    features: ['Laudos sob demanda', 'Conformidade com a NBR 16.747/2020', 'Relatório fotográfico automatizado', 'Classificação de anomalias e suporte às soluções técnicas'],
     cta: 'Assinar 6 meses',
     highlighted: false,
   },
@@ -44,7 +44,7 @@ const plans: Plan[] = [
     description: 'Melhor custo-benefício para uso intensivo',
     monthlyPrice: 'R$ 160',
     perLaudoPrice: 'R$ 240',
-    features: ['Assinatura anual', 'Menor custo por laudo', 'Laudos sob demanda', 'Conformidade com NBR 16.747/2020', 'Suporte prioritário', 'Renovação automática'],
+    features: ['Laudos sob demanda', 'Conformidade com a NBR 16.747/2020', 'Relatório fotográfico automatizado', 'Classificação de anomalias e suporte às soluções técnicas'],
     cta: 'Assinar 12 meses',
     highlighted: true,
   },
@@ -71,7 +71,7 @@ function PlanCard({ plan, onSelect }: { plan: Plan; onSelect: () => void }) {
         {plan.cta}
       </Button>
       <div className="pt-6 border-t border-sand-200 flex-grow">
-        <div className="text-label text-laudok-700 mb-4">O que está incluso</div>
+        <div className="text-label text-laudok-700 mb-4">Recursos incluídos</div>
         <ul className="space-y-3">
           {plan.features.map((feature) => (
             <li key={feature} className="flex items-start gap-2 text-body-s text-ink">

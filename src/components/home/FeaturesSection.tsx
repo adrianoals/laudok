@@ -4,9 +4,9 @@ import { Card, Eyebrow, IconTile, Reveal, SectionShell } from '@/components/ui';
 const features = [
   { icon: FileText, title: 'Laudos padronizados', desc: 'Geração automática conforme a NBR 16.747/2020.' },
   { icon: Clock, title: 'Economia de tempo', desc: 'Reduza até 80% do tempo gasto na elaboração de laudos.' },
-  { icon: Shield, title: 'Conformidade garantida', desc: 'Sempre atualizado com as normas técnicas mais recentes.' },
+  { icon: Shield, title: 'Processo automatizado de relatório fotográfico', desc: 'Sempre atualizado com as normas técnicas mais recentes.' },
   { icon: Users, title: 'Colaboração em equipe', desc: 'Compartilhe projetos e documentos com fluidez.' },
-  { icon: Zap, title: 'Processo otimizado', desc: 'Fluxo de trabalho que guia você em cada etapa.' },
+  { icon: Zap, title: 'Base de conhecimento de anomalias e soluções técnicas', desc: 'Fluxo de trabalho que guia você em cada etapa.' },
   { icon: BarChart, title: 'Análises detalhadas', desc: 'Relatórios completos com gráficos e estatísticas.' },
 ];
 

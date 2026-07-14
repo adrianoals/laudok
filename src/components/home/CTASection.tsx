@@ -24,7 +24,7 @@ export default function CTASection() {
           </Reveal>
           <Reveal delay={240}>
             <div className="mt-10">
-              <LinkButton href="/teste-gratis" size="lg" variant="inverse">
+              <LinkButton href="https://laudok.com.br/Account/Register" size="lg" variant="inverse">
                 Experimente Grátis
                 <ArrowRight size={18} />
               </LinkButton>

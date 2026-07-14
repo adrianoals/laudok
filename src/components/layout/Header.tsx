@@ -19,11 +19,18 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-md border-b border-sand-200">
+    <header className="fixed top-0 inset-x-0 z-50 bg-surface border-b border-sand-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
-            <Image src="/images/logo.svg" alt="Laudok! Logo" width={140} height={36} className="h-8 w-auto" />
+            <Image
+              src="/images/logo-vertical-sem-margens.png"
+              alt="Laudok! Logo"
+              width={845}
+              height={1001}
+              className="h-14 w-auto"
+              priority
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
@@ -35,10 +42,10 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="/login" className="hidden sm:inline-flex text-body-s font-medium text-laudok-800 hover:text-laudok-500 transition-colors">
+            <Link href="https://app.laudok.com.br" className="hidden sm:inline-flex text-body-s font-medium text-laudok-800 hover:text-laudok-500 transition-colors">
               Login
             </Link>
-            <LinkButton href="/teste-gratis" size="sm" className="hidden sm:inline-flex">
+            <LinkButton href="https://laudok.com.br/Account/Register" size="sm" className="hidden sm:inline-flex">
               Experimente Grátis
             </LinkButton>
             <button
@@ -66,7 +73,7 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/login" className="sm:hidden block px-3 py-2 rounded-md text-body font-medium text-laudok-800 hover:bg-sand-100 transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <Link href="https://app.laudok.com.br" className="sm:hidden block px-3 py-2 rounded-md text-body font-medium text-laudok-800 hover:bg-sand-100 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Login
             </Link>
           </nav>
